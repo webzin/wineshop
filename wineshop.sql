@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v9.63 
-MySQL - 5.5.5-10.4.11-MariaDB : Database - wineshop
+MySQL - 5.6.12-log : Database - wineshop
 *********************************************************************
 */
 
@@ -12,8 +12,6 @@ MySQL - 5.5.5-10.4.11-MariaDB : Database - wineshop
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`wineshop` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
-
 USE `wineshop`;
 
 /*Table structure for table `auditor_stock_updates` */
@@ -161,8 +159,8 @@ CREATE TABLE `users` (
   `store_id` int(11) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `email` varchar(255) NOT NULL,
-  `mobile` int(10) NOT NULL,
-  `adharno` int(20) NOT NULL,
+  `mobile` bigint(11) NOT NULL,
+  `adharno` bigint(20) NOT NULL,
   `password` varchar(30) NOT NULL,
   `address` varchar(255) NOT NULL,
   `country` varchar(15) NOT NULL,
@@ -179,7 +177,7 @@ CREATE TABLE `users` (
 
 /*Data for the table `users` */
 
-insert  into `users`(`id`,`store_id`,`name`,`email`,`mobile`,`adharno`,`password`,`address`,`country`,`zip`,`city`,`state`,`type`,`activated`) values (1,0,'Alex','alex@gmail.com',0,1313213132,'b¹âbÏGld£ÅBrž´.','64, Gandtoa, doeor slero','USA',0,'utah','SC','ADMIN','Y');
+insert  into `users`(`id`,`store_id`,`name`,`email`,`mobile`,`adharno`,`password`,`address`,`country`,`zip`,`city`,`state`,`type`,`activated`) values (1,0,'Bhakti Prasad','alex@gmail.com',9090909090,408773644415,'b¹âbÏGld£ÅBrž´.','64, Gandtoa, doeor slero','USA',0,'utah','SC','ADMIN','Y');
 
 /*Table structure for table `variants` */
 

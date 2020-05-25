@@ -1,9 +1,9 @@
 <?php
-error_reporting( error_reporting() & ~E_NOTICE );
+//error_reporting( error_reporting() & ~E_NOTICE );
 /********  local Config  ***********/
 //session_start();
   define('DBSERVER','localhost');
-  define('DATABASENAME','wineinventory');
+  define('DATABASENAME','wineshop');
   define('USERNAME','root');
   define('PASSWORD','');
 
