@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job version="9.0">
+<syncjob>
+<fkcheck check="yes" />
+<twowaysync twoway="yes" />
+<source>
+<host>mysql1005.mochahost.com</host>
+<user>webzin_user</user>
+<pwd>user!@#$951753</pwd>
+<port>3306</port>
+
+<compressed>1</compressed>
+<ssl>0</ssl>
+<sslauth>0</sslauth>
+<clientkey></clientkey>
+<clientcert></clientcert>
+<cacert></cacert>
+<cipher></cipher>
+<charset></charset>
+<database>webzin_wineshop</database>
+</source>
+<target>
+<host>localhost</host>
+<user>root</user>
+<pwd></pwd>
+<port>3306</port>
+
+<compressed>1</compressed>
+<ssl>0</ssl>
+<sslauth>0</sslauth>
+<clientkey></clientkey>
+<clientcert></clientcert>
+<cacert></cacert>
+<cipher></cipher>
+<charset></charset>
+<database>wineshop</database>
+</target>
+<tables all="yes" />
+<sync_action type="directsync" />
+<abortonerror abort="yes" />
+<sendreport send="no" /></syncjob>
+</job>
