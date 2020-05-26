@@ -1,19 +1,13 @@
-<?
-
-
-//connect to database
-
-include("connect.php");
+<?php include("top.php");  
 
 $pas=$_GET["pas"];
 
 $log=$_GET["log"];
 
-include("login_chk.php");
+//include("login_chk.php");
 
 ?>
-<?php 
-include("top.php"); ?>
+
 
 
 		<script type="text/javascript">
@@ -57,7 +51,7 @@ include("top.php"); ?>
 </script>
     </head>
     <body>
-
+ 
         <div class="container">
             <div class="row">
                 <div class="col-md-4 col-md-offset-4">
@@ -69,7 +63,7 @@ include("top.php"); ?>
                             <form role="form" id="login" action="password.php" method="post">
 							<div class="alert alert-danger alert-dismissable login-alert" style="display:none">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                    Invalid username / email or password
+                                    Invalid Mobile / email or password
                                 </div>
                                 <fieldset>
                                     <div class="form-group">

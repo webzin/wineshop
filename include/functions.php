@@ -1,40 +1,81 @@
 <?php
 
-// Get Name from Any Table GetName(tablename,return field name,where clause, id);
-
 function GetName($tablename,$field,$where,$id)
-{
-	$uquery="SELECT * FROM $tablename WHERE $where='$id'";
-	$uresult=mysql_query($uquery);
-	echo mysql_error();
-	$urow=mysql_fetch_object($uresult);
+{	
+ 	global $con;
+	$uquery= mysqli_query($con,"SELECT * FROM $tablename WHERE $where='$id'");
+	$urow=mysqli_fetch_object($uquery);
+	mysqli_error($con);
 	$newval=stripslashes( $urow->$field);
-	
-	return $newval;
+ 	return $newval;
+}
+
+function GetRand($tablename,$field,$limit)
+{	
+ 	global $con;
+	$uquery= mysqli_query($con,"SELECT * FROM $tablename ORDER BY RAND() LIMIT 0,$limit");
+	$urow=mysqli_fetch_object($uquery);
+	mysqli_error($con);
+	$newval=stripslashes( $urow->$field);
+ 	return $newval;
 }
 
 function GetTotal($tablename,$where,$name)
 {
-	$uquery="SELECT * FROM $tablename WHERE $where='$name'";
-	$uresult=mysql_query($uquery);
-	echo mysql_error();
-	$row_total= mysql_affected_rows();	
-	return $row_total;
-}
- 
-function GetCount($tablename)
-{
-	$uquery="SELECT * FROM $tablename ";
-	
-	$uresult=mysql_query($uquery);
-	echo mysql_error();
-	$row_total= mysql_affected_rows();	
+	global $con;
+ 	//echo $dd="SELECT count(*) as total FROM `$tablename` WHERE $where='$name'";
+	$uquery=mysqli_query($con,"SELECT count(*) as total FROM `$tablename` WHERE $where='$name'");
+	$uresult=mysqli_fetch_assoc($uquery);
+	//mysqli_error($con);
+	$row_total= $uresult['total'];	
 	return $row_total;
 }
 
-function GetImg($tablename,$field,$where,$id,$ord,$nm)
+function SumTotal($tablename, $columnname)
 {
-	$uquery="SELECT * FROM $tablename WHERE $where='$id' and $ord='$nm'";
+	global $con;
+	$uquery="SELECT SUM($columnname) AS value_sum FROM $tablename ";
+	$uresult=mysqli_query($con,$uquery);
+	$urow=mysqli_fetch_assoc($uresult);
+	//echo mysqli_error();
+	$newval = $urow['value_sum'];
+	return $newval;
+}
+
+ 
+function GetCount($tablename)
+{
+	global $con;
+	$uquery="SELECT * FROM $tablename ";
+	$uresult=mysqli_query($con,$uquery);
+	//echo mysqli_error();
+	$row_total=mysqli_num_rows($uresult);
+	return $row_total;
+}
+
+function MaxValue($tablename,$field,$where,$name)
+{
+	global $con;
+	$uquery= mysqli_query($con,"SELECT $field FROM `$tablename` WHERE $where='$name' ORDER BY $field DESC LIMIT 0,1");
+	$urow=mysqli_fetch_object($uquery);
+	mysqli_error($con);
+	$newval=stripslashes( $urow->$field);
+ 	return $newval;
+}
+function MinValue($tablename,$field,$where,$name)
+{
+	global $con;
+	$uquery= mysqli_query($con,"SELECT $field FROM `$tablename` WHERE $where='$name' ORDER BY $field ASC LIMIT 0,1");
+	$urow=mysqli_fetch_object($uquery);
+	mysqli_error($con);
+	$newval=stripslashes( $urow->$field);
+ 	return $newval;
+}
+
+
+function GetImg($tablename,$field,$where,$id,$fet,$ft)
+{
+	$uquery="SELECT * FROM $tablename WHERE $where='$id' and $fet='$ft'";
 	$uresult=mysql_query($uquery);
 	$urow=mysql_fetch_object($uresult);
 	echo mysql_error();
@@ -45,6 +86,7 @@ function GetImg($tablename,$field,$where,$id,$ord,$nm)
 
 function GetCombo($display,$tablename,$fieldname,$disfieldname,$where,$orderby,$selected)
 {	
+	global $con;
 	$hrquery="SELECT * FROM $tablename";
 	
 	if($where)
@@ -53,8 +95,8 @@ function GetCombo($display,$tablename,$fieldname,$disfieldname,$where,$orderby,$
 	}
 	$hrquery.=" ORDER BY $orderby";
 	
-	$hrresult=mysql_query($hrquery);
-	$hrtotalrow=mysql_affected_rows();
+	$hrresult=mysqli_query($con,$hrquery);
+	$hrtotalrow=mysqli_affected_rows($con);
 	
 	if($display)
 		$Getval="<option value=''>Select $display</option>";
@@ -62,7 +104,7 @@ function GetCombo($display,$tablename,$fieldname,$disfieldname,$where,$orderby,$
 	
 	for($hr=0;$hr<$hrtotalrow;$hr++)
 	{
-		$hrrow=mysql_fetch_object($hrresult);
+		$hrrow=mysqli_fetch_object($hrresult);
 		$newval=stripslashes(ucfirst($hrrow->$disfieldname));
 		$val=$hrrow->$fieldname;
 
@@ -286,5 +328,17 @@ function randomPassword() {
     return implode($pass); //turn the array into a string
 }
  
+function mysql_get_var($query,$y=0){
+       $res = mysqli_query($con,$query);
+       $row = mysqli_fetch_array($res);
+       mysqli_free_result($res);
+       $rec = $row[$y];
+       return $rec;
+}
+ 
+ 
+ 
+ 
 ?>
+ 
  

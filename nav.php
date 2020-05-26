@@ -18,75 +18,19 @@
 
                 <ul class="nav navbar-right navbar-top-links">
  
-					<li class="dropdown navbar-inverse">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-bell fa-fw"></i> <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu dropdown-alerts">
-						
-                            <li>
-                          
-                                    <strong>Alerts</strong>
-                                    
-                               
-                            </li>
-							<li class="divider"></li>
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <i class="fa fa-comment fa-fw"></i> New Comment
-                                        <span class="pull-right text-muted small">4 minutes ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                        <span class="pull-right text-muted small">12 minutes ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <i class="fa fa-envelope fa-fw"></i> Message Sent
-                                        <span class="pull-right text-muted small">4 minutes ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <i class="fa fa-tasks fa-fw"></i> New Task
-                                        <span class="pull-right text-muted small">4 minutes ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                        <span class="pull-right text-muted small">4 minutes ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            
-                        </ul>
-                    </li>
-				 
+					 
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="<?php echo $addres; ?>editprofile.php">
-                            <i class="fa fa-user fa-fw"></i> <? echo GetName('users','name','id',$user) ?><b class="caret"></b>
+                            <i class="fa fa-user fa-fw"></i> <?php echo GetName('users','name','id','1') ?><b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
                             <li><a href="user_profile.php"><i class="fa fa-user fa-fw"></i> User Profile</a>
                             </li>
-<?php if($UTYPE=='ADMIN') {?>
+ 
                             <li><a href="add_user.php"><i class="fa fa-plus fa-fw"></i> Add User</a></li>
                             <li><a href="manage_user.php"><i class="fa fa-users fa-fw"></i> Manage Users</a></li>
                             <li class="divider"></li>
-							 <?php } ?>
+						 
                             <li><a href="logout.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                             </li>
                         </ul>
@@ -102,7 +46,7 @@
                             <li>
                                 <a href="dashboard.php" class="active"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                             </li>
-                            <?php if($UTYPE=='ADMIN' || $UTYPE=='STORE')  {?>
+                            
                             <li>
                                 <a href="manage_customer.php"><i class="fa fa-users fa-fw"></i> Stores<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
@@ -169,16 +113,14 @@
                                 </ul>
                                 <!-- /.nav-second-level -->
                             </li>
-                            <?php } ?>
-                            
-							<?php if($UTYPE=='A') {?>
+                          
                             <li>
                                 <a href="load_report.php"><i class="fa fa-tasks fa-fw"></i> Load Reports</a>
                             </li>
                             <li>
                                 <a href="warrant_report.php"><i class="fa fa-file-text fa-fw"></i> Warrant Reports</a>
                             </li>
-                           <?php } ?>
+                          
                            
                             <li>
                                 <a href="#"><i class="fa fa-map fa-fw"></i> Stock Report<span class="fa arrow"></span></a>

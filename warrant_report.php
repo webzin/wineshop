@@ -1,7 +1,8 @@
-<?php
-//connect to database
- include("connect.php");
- //check user login session is logged out or not
+ 
+
+<?php include("top.php");  
+
+//check user login session is logged out or not
  include("logout_chk.php");
  //current user session assign to a variable
  $user=$_SESSION["AdmID"];
@@ -13,12 +14,8 @@
 	//get the message of the railcars page 
 	$msg=$_GET['msg'];
 	//loop throgh post values
- 
 	
-	    
-?>
-
-<?php include("top.php"); ?>
+	?>
  
        
 <!-- Page-Level Demo Scripts - Tables - Use for reference -->

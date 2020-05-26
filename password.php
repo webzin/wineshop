@@ -4,37 +4,38 @@
   $name=$_POST["username"];
   $pass=$_POST["password"];
   $signin=$_POST["remember"];
-
-  selquery="SELECT *, AES_DECRYPT(`password`, SHA1('aalizzwell')) AS passd FROM users WHERE (mobile='$name' or email='$name')";
-  $qryresult=mysql_query($selquery);
-  $check=mysql_num_rows($qryresult);
+ 
+	$selquery="SELECT *, AES_DECRYPT(`password`, SHA1('aalizzwell')) AS passd FROM users WHERE (mobile='$name' or email='$name')";
+	$qryresult=mysqli_query($con, $selquery);
+	$row=mysqli_fetch_assoc($qryresult);
+	$check=mysqli_num_rows($qryresult);
 	
-  $selrow=mysql_fetch_object($qryresult);
+ 
   
-	$ANAME=stripslashes($selrow->mobile);
-	$AEMAL=stripslashes($selrow->email);
- 	$APSWD=stripslashes($selrow->passd);
-	$AID=stripslashes($selrow->id);
-	$utype=stripslashes($selrow->type); 
+	$ANAME=stripslashes($row['name']);
+	$AEMAL=stripslashes($row['email']);
+ 	$APSWD=stripslashes($row['passd']);
+	echo $AID=stripslashes($row['id']);
+	$utype=stripslashes($row['type']); 
 
 /*	if($name==$ANAME || $name==$AEMAIL && $pass==$APSWD)*/
 	if($check!=0)
 	{
 		if($signin=="on")
 		{
-			setcookie("adm","");
-			setcookie("adm", $AID, time()+31536000);
-			//session_register("AdmID");
-			$rrr=$_SESSION["AdmID"]=$AID;
-			echo "<script>location.href='dashboard.php'</script>";			
+		setcookie("adm","");
+		setcookie("adm", $AID, time()+31536000);
+		echo "<script1>location.href='dashboard.php'</script>";			
 		}
-		 
+
 		else
 		{
-			setcookie("adm","");
-			//session_register("AdmID");
-			$rrr=$_SESSION["AdmID"]=$AID;
-			echo "<script>location.href='dashboard.php'</script>";	
+		session_start();
+		$_SESSION["AdmID"]=$AID;
+	 
+		setcookie("adm","");
+		setcookie("adm", $AID, time()+31536000);
+		echo "<script>location.href='dashboard.php'</script>";	
 		}
   	}
   else

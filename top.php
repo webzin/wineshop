@@ -1,5 +1,17 @@
+<?php 
+include("connect.php"); 
 
+if(is_array($_GET))
+{ 
+foreach($_GET as $var=>$valu)
+{ 
+$$var = $valu;  
 
+} 
+
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -11,7 +23,9 @@
 
 
 
- <title><? echo $ADMIN_SITE_TITLE; ?></title>
+ <title>
+ <?php echo $ADMIN_SITE_TITLE ;  ?>
+</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="<?php echo $stylepath; ?>bootstrap.min.css" rel="stylesheet">

@@ -1,6 +1,7 @@
+
+
+<?php include("top.php"); ?>
 <?php
-//connect to database
- include("connect.php");
  //check user login session is logged out or not
  include("logout_chk.php");
  //current user session assign to a variable
@@ -16,10 +17,7 @@
  
 	
 	    
-?>
-
-<?php include("top.php"); ?>
- 
+?> 
        
 <!-- Page-Level Demo Scripts - Tables - Use for reference -->
         <script>

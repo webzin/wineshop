@@ -13,7 +13,7 @@ session_register("UsrID");
 $rrr=$_SESSION["UsrID"]=$cokid;
 echo "<script>location.href='user_dashboard.php'</script>";
 }
-*/
+
 $uquery="SELECT type FROM users WHERE id='$user'";
 $qryu=mysql_query($uquery);
 $urow=mysql_fetch_object($qryu);
@@ -28,6 +28,6 @@ if($UTYPE=='C')
 echo "<script>location.href='customer_dashboard.php'</script>";
 
 }
-
+*/
 
 ?>
