@@ -1,17 +1,17 @@
 <?php
 //connect to database
-include("connect.php");
+ 
 //check user login session is logged out or not
-include("logout_chk.php");
+//include("logout_chk.php");
 //current user session assign to a variable
-$user=$_SESSION["AdmID"];
+//$user=$_SESSION["AdmID"];
  
-$warrant_id=$_GET["lid"];
-$id=$_GET["id"];
-$msg=$_GET['msg'];
-$act=$_GET['action'];
+$brand_id=isset($_GET["bid"]);
+$id=isset($_GET["id"]);
+$msg=isset($_GET['msg']);
+$act=isset($_GET['action']);
  
-include("user_chk.php");
+ 
 //gets the current date 
 	$curdate=date("Y-m-d");
 
@@ -25,15 +25,12 @@ foreach($_POST as $var=>$valu)
 $$var = addslashes($valu);
 }
 }
-
-
-
-	if($_POST["submit"])
+	if (isset($_POST["submit"]))
 	{
 
 		if(!$id)
 		
-					    {
+	   {
 						
 								
 $fql="SELECT * FROM bundles WHERE batch_id='$batch_id'";
@@ -160,9 +157,9 @@ jQuery('.sm').fadeIn();
 <? } ?>
 
  
-	$('#addbundle').validate({ // initialize the plugin
+	$('#additem').validate({ // initialize the plugin
         rules: {
-		warrant_id: {
+		brand_id: {
 		required: true,
 		},
 		brand: {
@@ -203,15 +200,15 @@ jQuery('.sm').fadeIn();
             <div id="page-wrapper">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header"><?php if($act==edit) { ?>Edit <? } if($act==view)  { ?>View <? } if($act==add) {?>Add <?php } ?>Bundle</h1>
+                        <h1 class="page-header"><?php if($act=='edit') { ?>Edit <? } if($act=='view')  { ?>View <? } if($act=='add') {?>Add <?php } ?>Items</h1>
                         <div class="alert alert-danger alert-dismissable login-alert" style="display:none">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                     <?php echo $msg1 ?><?php echo $msg11 ?><?php echo $msgwgt ?>
                                 </div>
                                 <div class="alert alert-success alert-dismissable sm" style="display:none">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                    <? if($msg==1) { ?>Bundle Added Sucessfully!!!<? } ?>
-                                    <? if($msg==2) { ?>Bundle Updated Sucessfully!!!<? } ?>
+                                    <? if($msg==1) { ?>Item Added Sucessfully!!!<? } ?>
+                                    <? if($msg==2) { ?>Item Updated Sucessfully!!!<? } ?>
                                     
                                 </div>
                     </div>
@@ -226,26 +223,39 @@ jQuery('.sm').fadeIn();
                             </div>
                             <div class="panel-body">
                                 <div class="row">
-                                <form role="form" name="addbundle" id="addbundle" method="post" enctype="multipart/form-data">
+                                <form role="form" name="additem" id="additem" method="post" enctype="multipart/form-data">
 
                                                                         <!-- /.col-lg-6 (nested) -->
                                     <div class="col-lg-6">
                                     <div class="form-group">
-                                            <label>Select Warrant:</label>
-                                            <select class="form-control" name="warrant_id"  <? if($act==view)  { ?>disabled <?php } ?> onChange="window.location.href='add_bundle.php?action=add&lid='+this.value" required>
-                                                <?php echo GetCombo("Warrant","warrants","id","warrant_no","","id","$warrant_id") ?>
+                                            <label>Brands#:</label>
+                                            <select class="form-control" name="brand_id"  <? if($act=='view')  { ?>disabled <?php } ?> required>
+                                                <?php echo GetCombo("Brands","brands","id","name","","id","$brand_id") ?>
                                                </select>
                                             </div>
-                                            <div class="form-group">
-                                            <label>Batch Id:</label>
-              
-                                               <input required type="number" class="form-control" placeholder="Batch ID" name="batch_id" value="<?php echo $batch_id; ?>"  <? if($act==view)  { ?>disabled <?php } ?>>
-                                            </div>
+                                            
                                              
                                             <div class="form-group">
-                                            <label>Brand#:</label>
-                                            <select required class="form-control" name="brand"  <? if($act==view)  { ?>disabled <?php } ?>>
-                                            <?php echo GetCombo("Brand","brands","id","name","","id","$brand") ?>
+                                            <label>Category#:</label>
+                                            <select required class="form-control" name="category"  <? if($act=='view')  { ?>disabled <?php } ?>>
+                                            <?php echo GetCombo("Category","variants_type","id","name","","id","$category") ?>
+                                            </select>
+                                               
+                                            </div>
+											
+											 <div class="form-group">
+                                            <label>Variants#:</label>
+                                            <select required class="form-control" name="variants"  <? if($act=='view')  { ?>disabled <?php } ?>>
+                                            <?php echo GetCombo("Variants","variants","id","name","","id","$variants") ?>
+                                            </select>
+                                               
+                                            </div>
+											
+											 <div class="form-group">
+                                            <label>Volume Size#:</label>
+                                            <select required class="form-control" name="volume"  <? if($act=='view')  { ?>disabled <?php } ?>>
+											<?php echo GetCombo("Variants","variants","id","name","","id","$variants") ?>
+                                            <?php echo GetCombo("Volumes","volume-size","id","name","","id","$volume") ?>
                                             </select>
                                                
                                             </div>

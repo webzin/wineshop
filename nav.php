@@ -89,7 +89,7 @@
                                 <!-- /.nav-second-level -->
                             </li>
                             <li>
-                                <a href="manage_warrant.php"><i class="fa fa-glass fa-fw"></i> Variants<span class="fa arrow"></span></a>
+                                <a href="#"><i class="fa fa-glass fa-fw"></i> Variants<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
                                       </i><a href="add_warrant.php"> Add Variants</a>
@@ -103,10 +103,10 @@
                                 <!-- /.nav-second-level -->
                             </li>
                             <li>
-                                <a href="manage_bundle.php"><i class="fa fa-support fa-fw"></i>Inventory<span class="fa arrow"></span></a>
+                                <a href="#"><i class="fa fa-support fa-fw"></i>Inventory<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
-								<li> <a href="add_bundle.php"> Add Items</a> </li>
-								<li> <a href="manage_bundle.php"> Manage Items</a> </li>
+								<li> <a href="add_items.php?act=add"> Add Items</a> </li>
+								<li> <a href="manage_items.php"> Manage Items</a> </li>
 								<li><a href="add_bundle.php"> Stock In</a></li> 
 								<li> <a href="manage_bundle.php"> Stock Out</a> </li>
 								<li> <a href="manage_bundle.php"> Manage Stocks</a> </li>
@@ -114,31 +114,35 @@
                                 <!-- /.nav-second-level -->
                             </li>
                           
-                            <li>
-                                <a href="load_report.php"><i class="fa fa-tasks fa-fw"></i> Load Reports</a>
-                            </li>
-                            <li>
-                                <a href="warrant_report.php"><i class="fa fa-file-text fa-fw"></i> Warrant Reports</a>
-                            </li>
-                          
+                            
                            
                             <li>
                                 <a href="#"><i class="fa fa-map fa-fw"></i> Stock Report<span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level">
+							 <li>
+                                <a href="stock_report.php?type=day"><i class="fa fa-bar-chart-o fa-fw"></i> Daily Reports</a>
+                            </li>
+                            <li>
+                                <a href="stock_report.php?type=month"><i class="fa fa-area-chart	 fa-fw"></i> Monthly Reports</a>
+                            </li>
+							 <li>
+                                <a href="stock_report.php?type=year"><i class="fa fa-pie-chart fa-fw"></i> Yearly Reports</a>
+                            </li>
+                          
                                     <li>
-                                        <a href="storewise_stock_report.php"><i class="fa fa-arrow-right fa-fw"></i>Storewise Stock Report</a>
+                                        <a href="stock_report.php?type=store"><i class="fa fa-pie-chart fa-fw"></i>Storewise Stock Report</a>
                                     </li>
 									
                                     <li>
-                                        <a href="brandwise_stock_report.php"><i class="fa fa-arrow-right fa-fw"></i>Brandwise Stock Report</a>
+                                        <a href="stock_report.php?type=brand"><i class="fa fa-pie-chart fa-fw"></i>Brandwise Stock Report</a>
                                     </li>
 									
 									<li>
-                                        <a href="brandwise_stock_report.php"><i class="fa fa-arrow-right fa-fw"></i>Typewise Stock Report</a>
+                                        <a href="stock_report.php?type=category"><i class="fa fa-pie-chart fa-fw"></i>Typewise Stock Report</a>
                                     </li>
 									
 									<li>
-                                        <a href="brandwise_stock_report.php"><i class="fa fa-arrow-right fa-fw"></i>Variantwise Stock Report</a>
+                                        <a href="stock_report.php?type=variant"><i class="fa fa-pie-chart fa-fw"></i>Variantwise Stock Report</a>
                                     </li>
 									
                                 </ul>
