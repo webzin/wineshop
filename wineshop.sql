@@ -91,29 +91,11 @@ CREATE TABLE `items` (
   `retail_price` int(11) DEFAULT NULL,
   `current_stock` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 /*Data for the table `items` */
 
-insert  into `items`(`id`,`brand_id`,`type_id`,`variant_id`,`vol_id`,`item_name`,`buy_price`,`wholesale_price`,`retail_price`,`current_stock`) values (1,0,NULL,0,NULL,NULL,NULL,NULL,NULL,10),(2,0,NULL,0,NULL,NULL,NULL,NULL,NULL,20),(3,0,NULL,0,NULL,NULL,NULL,NULL,NULL,30),(4,0,NULL,0,NULL,NULL,NULL,NULL,NULL,40),(5,0,NULL,0,NULL,NULL,NULL,NULL,NULL,50),(6,0,NULL,0,NULL,NULL,NULL,NULL,NULL,60),(7,0,NULL,0,NULL,NULL,NULL,NULL,NULL,70),(8,0,NULL,0,NULL,NULL,NULL,NULL,NULL,80),(9,0,NULL,0,NULL,NULL,NULL,NULL,NULL,90),(10,0,NULL,0,NULL,NULL,NULL,NULL,NULL,15),(11,0,NULL,0,NULL,NULL,NULL,NULL,NULL,25),(12,0,NULL,0,NULL,NULL,NULL,NULL,NULL,35),(13,0,NULL,0,NULL,NULL,NULL,NULL,NULL,45),(14,0,NULL,0,NULL,NULL,NULL,NULL,NULL,55),(15,0,NULL,0,NULL,NULL,NULL,NULL,NULL,65),(16,0,NULL,0,NULL,NULL,NULL,NULL,NULL,75),(17,0,NULL,0,NULL,NULL,NULL,NULL,NULL,85),(18,0,NULL,0,NULL,NULL,NULL,NULL,NULL,95),(19,0,NULL,0,NULL,NULL,NULL,NULL,NULL,99),(20,0,NULL,0,NULL,NULL,NULL,NULL,NULL,88),(21,0,NULL,0,NULL,NULL,NULL,NULL,NULL,77),(22,0,NULL,0,NULL,NULL,NULL,NULL,NULL,66),(23,0,NULL,0,NULL,NULL,NULL,NULL,NULL,55),(24,0,NULL,0,NULL,NULL,NULL,NULL,NULL,44),(25,0,NULL,0,NULL,NULL,NULL,NULL,NULL,33),(26,0,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL),(27,0,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL),(28,0,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL),(29,0,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL),(30,0,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL),(31,0,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL),(32,0,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL),(33,0,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL),(34,0,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL),(35,0,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL),(36,0,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL),(37,0,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL),(38,0,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL),(39,0,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL),(40,0,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL),(41,0,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL),(42,0,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL),(43,0,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL),(44,0,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL),(45,0,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL),(46,0,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL),(47,0,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL),(48,0,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL),(49,0,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL),(50,0,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL),(51,0,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL),(52,0,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL);
-
-/*Table structure for table `loads` */
-
-DROP TABLE IF EXISTS `loads`;
-
-CREATE TABLE `loads` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `arrival_date` date DEFAULT NULL,
-  `customer_id` int(11) DEFAULT NULL,
-  `order_no` int(20) DEFAULT NULL,
-  `vech_no` varchar(255) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `building` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `order_no` (`order_no`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-/*Data for the table `loads` */
+insert  into `items`(`id`,`brand_id`,`type_id`,`variant_id`,`vol_id`,`item_name`,`buy_price`,`wholesale_price`,`retail_price`,`current_stock`) values (1,1,1,16,6,'sdfsdfsdfs',11,11,11,NULL),(2,2,2,13,7,'sdfsdfsdfs',45,45,45,NULL),(3,2,2,13,7,'sdfsdfsdfs',45,45,45,NULL),(4,2,2,13,7,'sdfsdfsdfs',45,45,45,NULL),(5,2,2,13,7,'sdfsdfsdfs',45,45,45,NULL),(6,2,2,13,7,'sdfsdfsdfs',45,45,45,NULL),(7,2,2,13,7,'',45,45,45,NULL);
 
 /*Table structure for table `log` */
 
@@ -183,17 +165,20 @@ DROP TABLE IF EXISTS `stores`;
 CREATE TABLE `stores` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
+  `incharge_name` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `phone` bigint(20) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
   `city` varchar(111) DEFAULT NULL,
   `state` varchar(111) DEFAULT NULL,
   `country` varchar(22) DEFAULT NULL,
   `zip` int(7) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
 
 /*Data for the table `stores` */
 
-insert  into `stores`(`id`,`name`,`address`,`city`,`state`,`country`,`zip`) values (1,'Nayapalli','Nh5','bhubaneswar','odisha','india',751012),(2,'Patia','patia square','bhubaneswar','odisha','india',751024),(3,'Laxmisagar','laxmi sagar square','bhubaneswar','odisha','india',751008),(4,'Nayapalli','Nh5','bhubaneswar','odisha','india',751012),(5,'Patia','patia square','bhubaneswar','odisha','india',751024),(6,'Laxmisagar','laxmi sagar square','bhubaneswar','odisha','india',751008),(7,'Nayapalli','Nh5','bhubaneswar','odisha','india',751012),(8,'Patia','patia square','bhubaneswar','odisha','india',751024),(9,'Laxmisagar','laxmi sagar square','bhubaneswar','odisha','india',751008),(10,'Nayapalli','Nh5','bhubaneswar','odisha','india',751012),(11,'Patia','patia square','bhubaneswar','odisha','india',751024),(12,'Laxmisagar','laxmi sagar square','bhubaneswar','odisha','india',751008),(13,'Nayapalli','Nh5','bhubaneswar','odisha','india',751012),(14,'Patia','patia square','bhubaneswar','odisha','india',751024),(15,'Laxmisagar','laxmi sagar square','bhubaneswar','odisha','india',751008),(16,'Nayapalli','Nh5','bhubaneswar','odisha','india',751012),(17,'Patia','patia square','bhubaneswar','odisha','india',751024),(18,'Laxmisagar','laxmi sagar square','bhubaneswar','odisha','india',751008),(19,'Nayapalli','Nh5','bhubaneswar','odisha','india',751012),(20,'Patia','patia square','bhubaneswar','odisha','india',751024),(21,'Laxmisagar','laxmi sagar square','bhubaneswar','odisha','india',751008);
+insert  into `stores`(`id`,`name`,`incharge_name`,`email`,`phone`,`address`,`city`,`state`,`country`,`zip`) values (1,'Nayapalli',NULL,NULL,NULL,'Nh5','bhubaneswar','odisha','india',751012),(2,'Patia',NULL,NULL,NULL,'patia square','bhubaneswar','odisha','india',751024),(3,'Laxmisagar',NULL,NULL,NULL,'laxmi sagar square','bhubaneswar','odisha','india',751008),(4,'Nayapalli',NULL,NULL,NULL,'Nh5','bhubaneswar','odisha','india',751012),(5,'Patia',NULL,NULL,NULL,'patia square','bhubaneswar','odisha','india',751024),(6,'Laxmisagar',NULL,NULL,NULL,'laxmi sagar square','bhubaneswar','odisha','india',751008),(7,'Nayapalli',NULL,NULL,NULL,'Nh5','bhubaneswar','odisha','india',751012),(8,'Patia',NULL,NULL,NULL,'patia square','bhubaneswar','odisha','india',751024),(9,'Laxmisagar',NULL,NULL,NULL,'laxmi sagar square','bhubaneswar','odisha','india',751008),(10,'Nayapalli',NULL,NULL,NULL,'Nh5','bhubaneswar','odisha','india',751012),(11,'Patia',NULL,NULL,NULL,'patia square','bhubaneswar','odisha','india',751024),(12,'Laxmisagar',NULL,NULL,NULL,'laxmi sagar square','bhubaneswar','odisha','india',751008),(13,'Nayapalli',NULL,NULL,NULL,'Nh5','bhubaneswar','odisha','india',751012),(14,'Patia',NULL,NULL,NULL,'patia square','bhubaneswar','odisha','india',751024),(15,'Laxmisagar',NULL,NULL,NULL,'laxmi sagar square','bhubaneswar','odisha','india',751008),(16,'Nayapalli',NULL,NULL,NULL,'Nh5','bhubaneswar','odisha','india',751012),(17,'Patia',NULL,NULL,NULL,'patia square','bhubaneswar','odisha','india',751024),(18,'Laxmisagar',NULL,NULL,NULL,'laxmi sagar square','bhubaneswar','odisha','india',751008),(19,'Nayapalli',NULL,NULL,NULL,'Nh5','bhubaneswar','odisha','india',751012),(20,'Patia',NULL,NULL,NULL,'patia square','bhubaneswar','odisha','india',751024),(21,'Laxmisagar',NULL,NULL,NULL,'laxmi sagar square','bhubaneswar','odisha','india',751008),(22,'My Company Name','Eesserd','jason@satom.com',2147483647,'64, Gandtoa, doeor slero','Utah','Odisha','India',455451),(23,'My Company Name','Eesserd','jason@satom.com',9933885588,'64, Gandtoa, doeor slero','Utah','Odisha','India',455451),(24,'Webzin Infotech','tes erterte','sales@webzin.in',9040038535,'404, Brit Colony','Bhubaneswar','Odisha','India',751012),(25,'Webzin Infotech Pvt Ltd ','test tewrs','rkp@webzin.in',909090909090,'13/2484, Indira Maidan Street, CRP Square, Nayapalli','Bhubaneswar','Odisha','India',751012),(26,'Webzin Infotech Pvt Ltd','werwe werwerwe','KRISHNA@WZI.CO.IN',7978752027,'N1-14 IRC VILLAGE','BHUBANESWAR','Odisha','India',751015),(27,'Webzin Infotech Pvt Ltd','werwe werwerwe','KRISHNA@WZI.CO.IN',7978752027,'N1-14 IRC VILLAGE','BHUBANESWAR','Odisha','India',751015);
 
 /*Table structure for table `users` */
 
@@ -251,38 +236,20 @@ CREATE TABLE `variants_type` (
 
 insert  into `variants_type`(`id`,`name`) values (1,'Beer'),(11,'Brandy'),(8,'Breezer'),(10,'Gin'),(6,'Red Wine'),(4,'Rum'),(9,'Soctch'),(2,'Vodka'),(3,'Whisky'),(7,'White Wine'),(5,'Wine');
 
-/*Table structure for table `volume-size` */
+/*Table structure for table `volume` */
 
-DROP TABLE IF EXISTS `volume-size`;
+DROP TABLE IF EXISTS `volume`;
 
-CREATE TABLE `volume-size` (
+CREATE TABLE `volume` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQUE` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
-/*Data for the table `volume-size` */
+/*Data for the table `volume` */
 
-insert  into `volume-size`(`id`,`name`) values (3,'180ml'),(7,'275ml'),(8,'330ml'),(4,'375ml'),(9,'500ml'),(5,'650ml'),(10,'650ml DEF'),(6,'750ml'),(12,'750ml DEF'),(2,'90ml');
-
-/*Table structure for table `warrants` */
-
-DROP TABLE IF EXISTS `warrants`;
-
-CREATE TABLE `warrants` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `w_date` date DEFAULT NULL,
-  `load_id` int(11) DEFAULT NULL,
-  `customer_id` int(11) DEFAULT NULL,
-  `warrant_no` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `warrant_no` (`warrant_no`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
-
-/*Data for the table `warrants` */
-
-insert  into `warrants`(`id`,`w_date`,`load_id`,`customer_id`,`warrant_no`) values (1,'2018-05-17',1,63,'65454'),(2,'2018-05-17',3,64,'9879'),(3,'2018-05-30',4,6,'4465465'),(4,'2018-05-30',5,64,'566'),(5,'2018-05-30',6,63,'158'),(6,'2018-06-01',6,63,'48787'),(7,'2018-06-01',2,64,'2121');
+insert  into `volume`(`id`,`name`) values (3,'180ml'),(7,'275ml'),(8,'330ml'),(4,'375ml'),(9,'500ml'),(5,'650ml'),(10,'650ml DEF'),(6,'750ml'),(12,'750ml DEF'),(2,'90ml');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

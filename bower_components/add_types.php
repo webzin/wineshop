@@ -1,6 +1,6 @@
 <?php
 //connect to database
-include("connect.php");
+include("top.php");
 //check user login session is logged out or not
 include("logout_chk.php");
 //current user session assign to a variable
@@ -93,8 +93,7 @@ $selrow=mysql_fetch_object($selqry);
  
  
  
- ?>
-<?php include("top.php"); ?>
+ ?> 
 <script>  
 jQuery(document).ready(function(){
 

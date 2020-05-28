@@ -1,6 +1,6 @@
 <?php
 //connect to database
- include("connect.php");
+ include("top.php");
  //check user login session is logged out or not
  include("logout_chk.php");
  //current user session assign to a variable
@@ -22,13 +22,13 @@
 		 $$var = addslashes($valu);
 		}
 	}
-		$sqlload="SELECT * FROM loads";
+		/*$sqlload="SELECT * FROM loads";
 			$seload=mysql_query($sqlload);
 			$totrows=mysql_affected_rows();
-	    
+	    */
 ?>
 
-<?php include("top.php"); ?>
+ 
  
        
 <!-- Page-Level Demo Scripts - Tables - Use for reference -->

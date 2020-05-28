@@ -51,65 +51,39 @@
                                 <a href="manage_customer.php"><i class="fa fa-users fa-fw"></i> Stores<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="add_customer.php"> Add Stores</a>
+                                        <a href="add_stores.php"> Add Stores</a>
                                     </li>
 									
                                     <li>
-                                        <a href="manage_customer.php"> Manage Stores</a>
+                                        <a href="manage_stores.php"> Manage Stores</a>
                                     </li>
 									
                                 </ul>
                                 <!-- /.nav-second-level -->
                             </li>
                             <li>
-                                <a href="manage_loads.php"><i class="fa fa-tasks fa-fw"></i> Brands<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
-                                    <li>
-                                        <a href="add_load.php"> Add Brands</a>
-                                    </li>
-                                    <li>
-                                        <a href="manage_load.php"> Manage Brands</a>
-                                    </li>
-									
-                                </ul>
+                                <a href="manage_brands.php"><i class="fa fa-tasks fa-fw"></i> Brands<span class="fa arrow"></span></a>
+                                 
                                 <!-- /.nav-second-level -->
                             </li>
 							<li>
-                                <a href="manage_warrant.php"><i class="fa fa-file-text fa-fw"></i>Types<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
-                                    <li>
-                                      </i><a href="add_warrant.php"> Add Types</a>
-                                    </li>
-									
-                                    <li>
-                                      <a href="manage_warrant.php"> Manage Types</a>
-                                    </li>
-                                   
-                                </ul>
+                                <a href="manage_types.php"><i class="fa fa-file-text fa-fw"></i>Types<span class="fa arrow"></span></a>
+                                 
                                 <!-- /.nav-second-level -->
                             </li>
                             <li>
-                                <a href="#"><i class="fa fa-glass fa-fw"></i> Variants<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
-                                    <li>
-                                      </i><a href="add_warrant.php"> Add Variants</a>
-                                    </li>
-									
-                                    <li>
-                                      <a href="manage_warrant.php"> Manage Variants</a>
-                                    </li>
-                                   
-                                </ul>
+                                <a href="manage_variants.php"><i class="fa fa-glass fa-fw"></i> Variants<span class="fa arrow"></span></a>
+                                 
                                 <!-- /.nav-second-level -->
                             </li>
                             <li>
                                 <a href="#"><i class="fa fa-support fa-fw"></i>Inventory<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
-								<li> <a href="add_items.php?act=add"> Add Items</a> </li>
+								<li> <a href="add_items.php"> Add Items</a> </li>
 								<li> <a href="manage_items.php"> Manage Items</a> </li>
-								<li><a href="add_bundle.php"> Stock In</a></li> 
-								<li> <a href="manage_bundle.php"> Stock Out</a> </li>
-								<li> <a href="manage_bundle.php"> Manage Stocks</a> </li>
+								<li><a href="stock_in.php"> Stock In</a></li> 
+								<li> <a href="stock_out.php"> Stock Out</a> </li>
+								<li> <a href="manage_stocks.php"> Manage Stocks</a> </li>
                                 </ul>
                                 <!-- /.nav-second-level -->
                             </li>

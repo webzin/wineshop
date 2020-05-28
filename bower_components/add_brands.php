@@ -1,6 +1,6 @@
 <?php
 //connect to database
-include("connect.php");
+include("top.php");
 //check user login session is logged out or not
 include("logout_chk.php");
 //current user session assign to a variable
@@ -101,7 +101,7 @@ $lid=$selrow->load_id;
  
  
  ?>
-<?php include("top.php"); ?>
+ 
 <script type="text/javascript">  
 jQuery(document).ready(function(){
 

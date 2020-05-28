@@ -47,7 +47,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="manage_customer.php">
+                            <a href="manage_user.php">
                                 <div class="panel-footer">
                                     <span class="pull-left">View Details</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -70,7 +70,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="manage_bundle.php">
+                            <a href="manage_stores.php">
                                 <div class="panel-footer">
                                     <span class="pull-left">View Details</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -93,7 +93,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="manage_load.php">
+                            <a href="manage_brands.php">
                                 <div class="panel-footer">
                                     <span class="pull-left">View Details</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -116,7 +116,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="manage_warrant.php">
+                            <a href="manage_variants.php">
                                 <div class="panel-footer">
                                     <span class="pull-left">View Details</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -139,7 +139,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="manage_bundle.php">
+                            <a href="manage_types.php">
                                 <div class="panel-footer">
                                     <span class="pull-left">View Details</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -162,7 +162,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="manage_bundle.php">
+                            <a href="manage_items.php">
                                 <div class="panel-footer">
                                     <span class="pull-left">View Details</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

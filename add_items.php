@@ -1,5 +1,6 @@
-<?php
-//connect to database
+
+<?php include("top.php"); 
+
  
 //check user login session is logged out or not
 //include("logout_chk.php");
@@ -28,59 +29,42 @@ $$var = addslashes($valu);
 	if (isset($_POST["submit"]))
 	{
 
+
+		
+ /*
 		if(!$id)
 		
 	   {
-						
-								
-$fql="SELECT * FROM bundles WHERE batch_id='$batch_id'";
-$fel=mysql_query($fql);
-$row=mysql_affected_rows();
+ 
+
+$fql="SELECT * FROM bundles WHERE brand_id='$curdate'AND type_id='$cid' AND variant_id='$cuid' AND vol_id='$warrant_id'";
+$fel=mysqli_query($con,$fql);
+$row=mysqli_affected_rows();
 if($row>0)
 {
-$msg1="$batch_id Already Exhist..!";
+$msg1="Item () Already Exhist..!";
 
 }
 
 
 else{
-
-$fql1="SELECT * FROM warrants WHERE id='$warrant_id'";
-$fel1=mysql_query($fql1);
-$felrow=mysql_fetch_object($fel1);
-$cuid=$felrow->load_id;
+ */
+echo $itemname= GetName('brands','name','id','$brand_id'); 
+echo $insquery = "INSERT INTO items SET brand_id='$brand_id', type_id='$category', variant_id='$variants', vol_id='$volume', item_name='$itemname', buy_price='$bprice', wholesale_price='$wprice', retail_price='$rprice'";
 
 
-$result = mysql_query("SELECT SUM(list_w) AS value_sum FROM bundles where warrant_id='$warrant_id'"); 
-$row1 = mysql_fetch_assoc($result); 
-$sum = $row1['value_sum'];
-
-$sum1 = $sum + $list_w;
-
-if($sum1>3255) {
-
-
-
-$msgwgt="Total Weight is $sum1 : Limit Exhusted..! Choose Another Warrant";
-
-}
-else {
-$cid=GetName(loads,customer_id,id,$cuid);
-$insquery = "INSERT INTO bundles SET arrival_date='$curdate', custo_id='$cid', load_id='$cuid', warrant_id='$warrant_id', batch_id='$batch_id', brand='$brand', pieces='$pieces', list_w='$list_w', scale_w='$scale_w', location='$locaton'";
-
-
-			$insresult = mysql_query($insquery);
-			//message call for success
-			$Msg=1;
-			echo "<script>location.href='add_bundle.php?msg=$Msg&action=add&lid=$warrant_id'</script>";
-	 
-}
+$insresult = mysqli_query($con,$insquery);
+//message call for success
+$Msg=1;
+//echo "<script>location.href='add_items.php?msg=$Msg&action=add&lid=$warrant_id'</script>";
+/*
+}*/
  }
 			
-	 }
+ 
 	
 
- 
+ /*
 
 if($id)
 		
@@ -107,8 +91,8 @@ $query = "UPDATE bundles SET arrival_date='$curdate', warrant_id='$warrant_id', 
 			
 	}		
 }	
+ */
  
-}
  if($id)
 //select query to get the values
 {
@@ -131,7 +115,7 @@ $location=$selrow->location;
  
  
  ?>
-<?php include("top.php"); ?>
+
 <script>  
 jQuery(document).ready(function(){
 
@@ -200,7 +184,7 @@ jQuery('.sm').fadeIn();
             <div id="page-wrapper">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header"><?php if($act=='edit') { ?>Edit <? } if($act=='view')  { ?>View <? } if($act=='add') {?>Add <?php } ?>Items</h1>
+                        <h1 class="page-header"><?php if($act=='edit') { ?>Edit <? } if($act=='view')  { ?>View <? } else {?>Add <?php } ?>Items</h1>
                         <div class="alert alert-danger alert-dismissable login-alert" style="display:none">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                     <?php echo $msg1 ?><?php echo $msg11 ?><?php echo $msgwgt ?>
@@ -254,65 +238,36 @@ jQuery('.sm').fadeIn();
 											 <div class="form-group">
                                             <label>Volume Size#:</label>
                                             <select required class="form-control" name="volume"  <? if($act=='view')  { ?>disabled <?php } ?>>
-											<?php echo GetCombo("Variants","variants","id","name","","id","$variants") ?>
-                                            <?php echo GetCombo("Volumes","volume-size","id","name","","id","$volume") ?>
+											<?php echo GetCombo("Volumes","volume","id","name","","id","$volume") ?>
                                             </select>
                                                
                                             </div>
                                                                                 
-                                        <div class="form-group">
-                                            <label>Pieces:</label>
-              
-                                               <input required type="number" class="form-control" placeholder="Pieces" name="pieces" value="<?php echo $pieces; ?>"  <? if($act==view)  { ?>disabled <?php } ?>>
-                                            </div>
+                                        
                                         
                                     </div>
                                     <div class="col-lg-6">
                                      
-                                            
                                             <div class="form-group">
-                                            <label>List Weight</label>
-                                               <input required type="number" min="0" max="3255" class="form-control" id="lw" placeholder="List Weight" name="list_w" value="<?php echo $list_w; ?>"  <? if($act==view)  { ?>disabled <?php } ?> onBlur="add_number()"> 
-                                               <code id="total">Current Total Weight is : 
-												<?php 
-												
-												$result1 = mysql_query("SELECT SUM(list_w) AS value_sum FROM bundles where warrant_id='$warrant_id'"); 
-												$row11 = mysql_fetch_assoc($result1); 
-												$suma1 = $row11['value_sum']
-                                                
-                                                ?>
-                                                <i id="total1"><?php   if($suma1=="") { echo "0"; } else { echo "$suma1"; }  ?></i>
-                                                </code>
-                                               
-												<script type="text/javascript">
-                                                          function add_number() {
-               
-                var first_number = <?php   if($suma1=="") { echo "0"; } else { echo "$suma1"; }  ?>;
-                var second_number = parseInt(document.getElementById("lw").value);
-                var result = first_number + second_number;
-     
-                document.getElementById("total1").innerHTML  = result;
-				
-            }
-                                                </script>
+                                            <label>Purchase Price:</label>
+              
+                                               <input required type="number" class="form-control" placeholder="Purchase Price" name="bprice" value="<?php echo $bprice; ?>"  <? if($act=='view')  { ?>disabled <?php } ?>>
                                             </div>
                                             <div class="form-group">
-                                            <label>Scale Weight:</label>
-                                               <input required type="number" class="form-control" placeholder="Scale Weight" name="scale_w" id="sw" value="<?php echo $scale_w; ?>"  <? if($act==view)  { ?>disabled <?php } ?>>
-                                               
-                                            </div>
-                                            <div class="form-group">
-                                            <label>Location#:</label>
-                                            <select required class="form-control" name="locaton"  <? if($act==view)  { ?>disabled <?php } ?>>
-                                           <?php echo GetCombo("Location","location","id","name","","id","$location") ?>
+                                            <label>Wholesale Price:</label>
+                                               <input required type="number" class="form-control" id="wprice" placeholder="Wholesale Price" name="wprice" value="<?php echo $wprice; ?>"  <? if($act=='view')  { ?>disabled <?php } ?> onBlur="add_number()"> 
                                              
-                                            </select>
-                                                
                                             </div>
+                                            <div class="form-group">
+                                            <label>Retail Price:</label>
+                                               <input required type="number" class="form-control" placeholder="Retail Price" name="rprice" id="rprice" value="<?php echo $rprice; ?>"  <? if($act=='view')  { ?>disabled <?php } ?>>
+                                               
+                                            </div>
+                                             
                                            
                                 
                                          
-                          <input name="submit" type="submit" class="btn btn-primary" value="<?php if($id) { ?>Update<? } else { ?>Add<? } ?> Bundle" <? if($act==view)  { ?>disabled <?php } ?> >   
+                          <input name="submit" type="submit" class="btn btn-primary" value="<?php if($id) { ?>Update<? } else { ?>Add<? } ?> Bundle" <? if($act=='view')  { ?>disabled <?php } ?> >   
                                         
                                         
                                     </div>

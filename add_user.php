@@ -1,6 +1,6 @@
 <?php
 //connect to database
-include("connect.php");
+include("top.php");
 //check user login session is logged out or not
 include("logout_chk.php");
 //current user session assign to a variable
@@ -95,7 +95,7 @@ $selrow=mysql_fetch_object($selqry);
  
  
  ?>
-<?php include("top.php"); ?>
+ 
 <script>  
 jQuery(document).ready(function(){
 
@@ -132,7 +132,7 @@ jQuery('.sm').fadeIn();
             <div id="page-wrapper">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header"><?php if($act==edit) { ?>Edit <? } if($act==view)  { ?>View <? } if($act==add) {?>Add <?php } ?>User</h1>
+                        <h1 class="page-header"><?php if($act=='edit') { ?>Edit <? } if($act=='view')  { ?>View <? } else {?>Add <?php } ?>User</h1>
                         <div class="alert alert-danger alert-dismissable login-alert" style="display:none">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                     <?php echo $msg1 ?><?php echo $msg11 ?>
@@ -158,18 +158,42 @@ jQuery('.sm').fadeIn();
                                 <form role="form" name="profile" id="profile" method="post" enctype="multipart/form-data">
 
                                     <div class="col-lg-6">
-                                                                                    <div class="form-group">
-                                            <label for="validationCustom01">FullName:</label>
-<input class="form-control" placeholder="Full Name" name="fullname" value="<?php echo $selrow->name; ?>" required>
-                                             </div>
+                                                
+												 <div class="form-group">
+                                    <label>Select a Store </label>
+                                    
+                                      <select class="form-control" name="store_id"  <? if($act=='view')  { ?>disabled <?php } ?> required>
+                                                <?php echo GetCombo("Store","stores","id","name","","id","$store_id") ?>
+                                               </select>
+                                            </div>
+												
+												
                                             <div class="form-group">
-                                            <label>Username:</label>
+                                            <label>FullName:</label>
                                             <div class="form-group input-group">
                                             
                                                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
-<input type="text" class="form-control" placeholder="Username" name="username" value="<?php echo $selrow->username; ?>" <?php if($id) { ?>readonly="readonly"<? }?> required>
+<input class="form-control" placeholder="Full Name" name="fullname" value="<?php echo $selrow->name; ?>" required>
                                             </div>
                                             </div>
+											 <div class="form-group">
+                                            <label>Eamil Address:</label>
+                                            <div class="form-group input-group">
+                                            
+                                                <span class="input-group-addon"><i class="fa fa-envelope-o"></i></span>
+ <input type="email" class="form-control" placeholder="name@example.com" name="email" value="<?php echo $selrow->email; ?>"<?php if($id) { ?>readonly="readonly"<? }?> required>
+                                            </div>
+                                            </div>
+											<div class="form-group">
+                                            <label>Phone Number:</label>
+                                             <div class="form-group input-group">
+                                             
+                                                <span class="input-group-addon"><i class="fa fa-phone"></i>
+                                                </span>
+<input type="number" class="form-control" placeholder="Phone Number" name="contactno" value="<?php echo $selrow->contactno; ?>" required>
+                                            </div>
+                                            </div>
+											
                                             <div class="form-group">
                                             <label>Password:</label>
                                             <div class="form-group input-group">
@@ -179,23 +203,8 @@ jQuery('.sm').fadeIn();
                                             </div>
                                             </div>
                                                
-                                               <div class="form-group">
-                                            <label>Eamil Address:</label>
-                                            <div class="form-group input-group">
-                                            
-                                                <span class="input-group-addon"><i class="fa fa-envelope-o"></i></span>
- <input type="email" class="form-control" placeholder="name@example.com" name="email" value="<?php echo $selrow->email; ?>"<?php if($id) { ?>readonly="readonly"<? }?> required>
-                                            </div>
-                                            </div>
-                                             <div class="form-group">
-                                            <label>Phone Number:</label>
-                                             <div class="form-group input-group">
+                                              
                                              
-                                                <span class="input-group-addon"><i class="fa fa-phone"></i>
-                                                </span>
-<input type="number" class="form-control" placeholder="Phone Number" name="contactno" value="<?php echo $selrow->contactno; ?>" required>
-                                            </div>
-                                            </div>
                                             
                                             
                                      
@@ -216,58 +225,7 @@ jQuery('.sm').fadeIn();
                                             <div class="form-group">
                                             <label>State:</label>
                                                <select name="state" id="state" class="form-control" required>
-  <option value="" >Select a State</option>
-<option <? if($selrow->state==AL) {  echo "selected "; } ?>value="AL">Alabama</option>
-<option <? if($selrow->state==AK) {  echo "selected "; } ?>value="AK">Alaska</option>
-<option <? if($selrow->state==AZ) {  echo "selected "; } ?>value="AZ">Arizona</option>
-<option <? if($selrow->state==AR) {  echo "selected "; } ?>value="AR">Arkansas</option>
-<option <? if($selrow->state==CA) {  echo "selected "; } ?>value="CA">California</option>
-<option <? if($selrow->state==CO) {  echo "selected "; } ?>value="CO">Colorado</option>
-<option <? if($selrow->state==CT) {  echo "selected "; } ?>value="CT">Connecticut</option>
-<option <? if($selrow->state==DE) {  echo "selected "; } ?>value="DE">Delaware</option>
-<option <? if($selrow->state==DC) {  echo "selected "; } ?>value="DC">District Of Columbia</option>
-<option <? if($selrow->state==FL) {  echo "selected "; } ?>value="FL">Florida</option>
-<option <? if($selrow->state==GA) {  echo "selected "; } ?>value="GA">Georgia</option>
-<option <? if($selrow->state==HI) {  echo "selected "; } ?>value="HI">Hawaii</option>
-<option <? if($selrow->state==ID) {  echo "selected "; } ?>value="ID">Idaho</option>
-<option <? if($selrow->state==IL) {  echo "selected "; } ?>value="IL">Illinois</option>
-<option <? if($selrow->state==IN) {  echo "selected "; } ?>value="IN">Indiana</option>
-<option <? if($selrow->state==IA) {  echo "selected "; } ?>value="IA">Iowa</option>
-<option <? if($selrow->state==KS) {  echo "selected "; } ?>value="KS">Kansas</option>
-<option <? if($selrow->state==KY) {  echo "selected "; } ?>value="KY">Kentucky</option>
-<option <? if($selrow->state==LA) {  echo "selected "; } ?>value="LA">Louisiana</option>
-<option <? if($selrow->state==ME) {  echo "selected "; } ?>value="ME">Maine</option>
-<option <? if($selrow->state==MD) {  echo "selected "; } ?>value="MD">Maryland</option>
-<option <? if($selrow->state==MA) {  echo "selected "; } ?>value="MA">Massachusetts</option>
-<option <? if($selrow->state==MI) {  echo "selected "; } ?>value="MI">Michigan</option>
-<option <? if($selrow->state==MN) {  echo "selected "; } ?>value="MN">Minnesota</option>
-<option <? if($selrow->state==MS) {  echo "selected "; } ?>value="MS">Mississippi</option>
-<option <? if($selrow->state==MO) {  echo "selected "; } ?>value="MO">Missouri</option>
-<option <? if($selrow->state==MT) {  echo "selected "; } ?>value="MT">Montana</option>
-<option <? if($selrow->state==NE) {  echo "selected "; } ?>value="NE">Nebraska</option>
-<option <? if($selrow->state==NV) {  echo "selected "; } ?>value="NV">Nevada</option>
-<option <? if($selrow->state==NH) {  echo "selected "; } ?>value="NH">New Hampshire</option>
-<option <? if($selrow->state==NJ) {  echo "selected "; } ?>value="NJ">New Jersey</option>
-<option <? if($selrow->state==NM) {  echo "selected "; } ?>value="NM">New Mexico</option>
-<option <? if($selrow->state==NY) {  echo "selected "; } ?>value="NY">New York</option>
-<option <? if($selrow->state==NC) {  echo "selected "; } ?>value="NC">North Carolina</option>
-<option <? if($selrow->state==ND) {  echo "selected "; } ?>value="ND">North Dakota</option>
-<option <? if($selrow->state==OH) {  echo "selected "; } ?>value="OH">Ohio</option>
-<option <? if($selrow->state==OK) {  echo "selected "; } ?>value="OK">Oklahoma</option>
-<option <? if($selrow->state=='OR') {  echo "selected "; } ?>value="OR">Oregon</option>
-<option <? if($selrow->state==PA) {  echo "selected "; } ?>value="PA">Pennsylvania</option>
-<option <? if($selrow->state==RI) {  echo "selected "; } ?>value="RI">Rhode Island</option>
-<option <? if($selrow->state==SC) {  echo "selected "; } ?>value="SC">South Carolina</option>
-<option <? if($selrow->state==SD) {  echo "selected "; } ?>value="SD">South Dakota</option>
-<option <? if($selrow->state==TN) {  echo "selected "; } ?>value="TN">Tennessee</option>
-<option <? if($selrow->state==TX) {  echo "selected "; } ?>value="TX">Texas</option>
-<option <? if($selrow->state==UT) {  echo "selected "; } ?>value="UT">Utah</option>
-<option <? if($selrow->state==VT) {  echo "selected "; } ?>value="VT">Vermont</option>
-<option <? if($selrow->state==VA) {  echo "selected "; } ?>value="VA">Virginia</option>
-<option <? if($selrow->state==WA) {  echo "selected "; } ?>value="WA">Washington</option>
-<option <? if($selrow->state==WV) {  echo "selected "; } ?>value="WV">West Virginia</option>
-<option <? if($selrow->state==WI) {  echo "selected "; } ?>value="WI">Wisconsin</option>
-<option <? if($selrow->state==WY) {  echo "selected "; } ?>value="WY">Wyoming</option>
+  <option value="Odisha" selected >Odisha</option> 
 
 </select>
                                                
@@ -275,22 +233,20 @@ jQuery('.sm').fadeIn();
                                             <div class="form-group">
                                             <label>Country:</label>
                                                 <select class="form-control" name="country" required>
-                                                    <option value="">Select One</option>
-													<option value="USA"<? if($selrow->country==USA) {  echo "selected "; } ?>>United States Of America</option>
-                                                     
+                                                    <option value="India" selected >India</option>
+												  
                                                 </select>
                                                
                                             </div>
                                             
                                 <div class="form-group">
                                     <label>User Type</label>
-                                    <label class="radio-inline">
-        <input type="radio" name="type" id="optionsRadiosInline1" value="A" <? if($selrow->type==A) {  echo "checked "; } ?>>Admin
-    </label>
-    <label class="radio-inline">
-        <input type="radio" name="type" id="optionsRadiosInline2" value="U" <? if($selrow->type==U) {  echo "checked "; } ?>>User
-    </label>
-                                     
+                                    
+                                      <select class="form-control" name="type" required>
+											<option value="STORE" selected >Store Manager</option>
+											<option value="DEPOT" selected >Depot Manager</option>
+											<option value="AUDIT" selected >Auditor</option>
+                                                </select>
                                             </div>
                                          
                           <input name="submit" type="submit" class="btn btn-primary" value="<?php if($id) { ?>Update<? } else { ?>Add User<? } ?>">                                     
