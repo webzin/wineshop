@@ -1,6 +1,6 @@
 <?php
 //connect to database
- include("connect.php");
+ include("top.php");
  //check user login session is logged out or not
  include("logout_chk.php");
  //current user session assign to a variable
@@ -13,22 +13,21 @@
 	//get the message of the railcars page 
 	$msg=$_GET['msg'];
 	//loop throgh post values
-	if(is_array($_POST))
+if(is_array($_POST))
 
-	{
-		//grabs the $_POST variables and adds slashes
-		foreach($_POST as $var=>$valu)
-		{
-		 $$var = addslashes($valu);
-		}
-	}
-		$sqlSelectclient="SELECT * FROM bundles";
-			$selectclient=mysql_query($sqlSelectclient);
-			$totrows=mysql_affected_rows();
-	    
+{
+//grabs the $_POST variables and adds slashes
+foreach($_POST as $var=>$valu)
+{
+$$var = addslashes($valu);
+}
+}
+$sqlSelectclient="SELECT * FROM items";
+$selectclient=mysqli_query($con,$sqlSelectclient);
+$totrows=mysqli_affected_rows($con);
+
 ?>
-
-<?php include("top.php"); ?>
+ 
  
        
 <!-- Page-Level Demo Scripts - Tables - Use for reference -->
@@ -69,15 +68,15 @@
             <div id="page-wrapper">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Manage Bundles</h1>
+                        <h1 class="page-header">Manage Items</h1>
 						<div class="alert alert-danger alert-dismissable login-alert" style="display:none">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                    Bundles Deleted
+                                    Item Deleted
                                 </div>
                                 <div class="alert alert-success alert-dismissable sm" style="display:none">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                    <? if($msg==1) { ?>Bundle Added Sucessfully!!!<? } ?>
-                                    <? if($msg==2) { ?>Bundle Updated Sucessfully!!!<? } ?>
+                                    <? if($msg==1) { ?>Item Added Sucessfully!!!<? } ?>
+                                    <? if($msg==2) { ?>Item Updated Sucessfully!!!<? } ?>
                                     
                                 </div>
                     </div>
@@ -88,7 +87,7 @@
                     <div class="col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                Bundles Details
+                                Item Details
                             </div>
                             <!-- /.panel-heading -->
                             <div class="panel-body">
@@ -96,15 +95,15 @@
                                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                         <thead>
                                             <tr>
-                                                <th>Date</th>
-                                                <th>Order#</th>
-                                                <th>Veichle#:</th>
-                                                <th>Warrant#</th>
-                                                <th>Batch#</th>
                                                 <th>Brand</th>
-                                                <th>Pieces</th>
-                                                <th>Weight</th>
-                                                  <th>Location</th>
+                                                <th>Variants</th>
+                                                <th>Type</th>
+                                                <th>Volume</th>
+                                                <th>B Price</th>
+                                                <th>W Price</th>
+												<th>R Price</th>
+                                                <th>Stock</th>
+												
 												<th>Options</th>
 
                                             </tr>
@@ -113,7 +112,7 @@
                                         <tbody>
                                         <?php 
 	   $i=0;
-	  while($resultclient=mysql_fetch_object($selectclient))
+	  while($resultclient=mysqli_fetch_object($selectclient))
         	  {
 			
 				 if($i % 2 != "0")
@@ -129,23 +128,22 @@
 		 
           
                                             <tr class="<?php echo $class; ?>" id="<? echo stripslashes($resultclient->id); ?>">
-                                                <td><? echo stripslashes($resultclient->arrival_date); ?></td>
-                                                 <td><? echo GetName(loads,order_no,id,$resultclient->load_id) ?></td>
-                                                 <td><? echo GetName(loads,vech_no,id,$resultclient->load_id) ?></td>
-                                                <td><? echo GetName(warrants,warrant_no,id,$resultclient->warrant_id) ?></td>
-                                                <td><? echo stripslashes($resultclient->batch_id); ?></td>
-                                                <td><? echo GetName(brands,name,id,$resultclient->brand) ?></td>
-                                                <td><? echo stripslashes($resultclient->pieces); ?></td>
-                                                <td class="center"><? echo stripslashes($resultclient->list_w); ?></td>
-                                                 <td class="center"><? echo GetName(location,name,id,$resultclient->location) ?></td>
-                                             
-											
+                                                <td><? echo GetName('brands','name','id',$resultclient->brand_id); ?></td>
+                                                <td><? echo GetName('variants','name','id',$resultclient->variant_id); ?></td>
+                                                <td><? echo GetName('variants_type','name','id',$resultclient->type_id); ?></td>
+                                                <td><? echo GetName('volume','name','id',$resultclient->vol_id); ?></td>
+                                                <td class="center"><? echo stripslashes($resultclient->buy_price); ?></td>
+                                                <td class="center"><? echo stripslashes($resultclient->wholesale_price); ?></td>
+												<td class="center"> <? echo stripslashes($resultclient->retail_price); ?></td>
+                                                <td><? echo stripslashes($resultclient->email); ?></td>
 												<td class="center">
-												<a class="btn btn-success btn-circle" href="add_bundle.php?action=view&id=<? echo stripslashes($resultclient->id); ?>"><i class="fa fa-search"></i></a>
-												<a class="btn btn-info btn-circle" href="add_bundle.php?action=edit&id=<? echo stripslashes($resultclient->id); ?>"><i class="fa fa-edit"></i></a>
-                                                <?php if($UTYPE=='A') {?>
-												<a href="javascript:void();" class="btn btn-danger btn-circle delbundle"><i class="fa fa-times"></i></a>
-                                                <?php } ?>
+												<a class="btn btn-success btn-circle" href="add_Items.php?action=view&id=<? echo stripslashes($resultclient->id); ?>"><i class="fa fa-search"></i></a>
+												<a class="btn btn-info btn-circle" href="add_Items.php?action=edit&id=<? echo stripslashes($resultclient->id); ?>"><i class="fa fa-edit"></i></a>
+												 
+														<?php if($UTYPE=='A') {?>
+ 										<a href="javascript:void();" class="btn btn-danger btn-circle delwarrant"><i class="fa fa-times"></i></a>
+												<?php }?>
+                                                 
 												</td>
                                             </tr>
                                               <? $i++; } ?>

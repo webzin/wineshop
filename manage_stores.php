@@ -13,15 +13,15 @@
 	//get the message of the railcars page 
 	$msg=$_GET['msg'];
 	//loop throgh post values
-	if(is_array($_POST))
+if(is_array($_POST))
 
-	{
-		//grabs the $_POST variables and adds slashes
-		foreach($_POST as $var=>$valu)
-		{
-		 $$var = addslashes($valu);
-		}
-	}
+{
+//grabs the $_POST variables and adds slashes
+foreach($_POST as $var=>$valu)
+{
+$$var = addslashes($valu);
+}
+}
 $sqlSelectclient="SELECT * FROM stores";
 $selectclient=mysqli_query($con,$sqlSelectclient);
 $totrows=mysqli_affected_rows($con);
@@ -71,7 +71,7 @@ $totrows=mysqli_affected_rows($con);
                         <h1 class="page-header">Manage Stores</h1>
 						<div class="alert alert-danger alert-dismissable login-alert" style="display:none">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                    Stores Deleted
+                                    Store Deleted
                                 </div>
                                 <div class="alert alert-success alert-dismissable sm" style="display:none">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -99,7 +99,7 @@ $totrows=mysqli_affected_rows($con);
                                                 <th>Manager Name</th>
 												<th>Email</th>
                                                 <th>Phone</th>
-												<th>Address</th>
+												<th>City</th>
                                                 <th>Zip</th>
 												
 												<th>Options</th>
@@ -130,14 +130,14 @@ $totrows=mysqli_affected_rows($con);
                                                 <td><? echo stripslashes($resultclient->incharge_name); ?></td>
                                                 <td><? echo stripslashes($resultclient->email); ?></td>
                                                 <td class="center"><? echo stripslashes($resultclient->phone); ?></td>
-                                                <td class="center"><? echo stripslashes($resultclient->address); ?>, <? echo stripslashes($resultclient->city); ?>, <? echo stripslashes($resultclient->state); ?>, <? echo stripslashes($resultclient->country); ?></td>
+                                                <td class="center"><? echo stripslashes($resultclient->city); ?></td>
 												<td class="center"> <? echo stripslashes($resultclient->zip); ?></td>
 												<td class="center">
 												<a class="btn btn-success btn-circle" href="add_stores.php?action=view&id=<? echo stripslashes($resultclient->id); ?>"><i class="fa fa-search"></i></a>
 												<a class="btn btn-info btn-circle" href="add_stores.php?action=edit&id=<? echo stripslashes($resultclient->id); ?>"><i class="fa fa-edit"></i></a>
-												<?php if($UTYPE=='A') {?>
-												<a href="javascript:void();" class="btn btn-danger btn-circle delcustomer"><i class="fa fa-times"></i></a>
-                                                <?php } ?>
+												 
+												<a href="javascript:void();" class="btn btn-danger btn-circle delstore"><i class="fa fa-times"></i></a>
+                                                 
 												</td>
                                             </tr>
                                               <? $i++; } ?>

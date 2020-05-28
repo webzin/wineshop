@@ -110,13 +110,13 @@ input.error,select.error {
 	}); 
 
 
-	jQuery('.delcustomer').click(function(){
-	   var conf = confirm('Continue delete the Client Details?');
+	jQuery('.delstore').click(function(){
+	   var conf = confirm('Continue delete the Store Details?');
 	   if(conf)
 		  jQuery(this).parents('tr').fadeOut(function(){
 			 jQuery(this).remove();
 			 var current_id =  jQuery(this).attr('id');
-			  window.location='alldel.php?' + 'id=' + current_id + '&ti=rc';
+			  window.location='alldel.php?' + 'id=' + current_id + '&ti=rs';
 		  });
 	   return false;
 	}); 

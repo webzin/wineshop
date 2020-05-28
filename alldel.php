@@ -17,13 +17,13 @@
 	$msg=5;
 	echo "<script>location.href='manage_user.php?msg=$msg'</script>";
 	}
-	if($ti=="rc")
+	if($ti=="rs")
 	//delete for the selected row 
 	{
-	$dele="DELETE FROM customers WHERE id=$id";
-	$deleq=mysql_query($dele);
+	$dele="DELETE FROM stores WHERE id=$id";
+	$deleq=mysqli_query($con,$dele);
 	$msg=6;
-	echo "<script>location.href='manage_customer.php?msg=$msg'</script>";
+	echo "<script>location.href='manage_stores.php?msg=$msg'</script>";
 	}
 	
 	if($ti=="wr")
