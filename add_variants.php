@@ -3,14 +3,19 @@
 include("top.php");
 //check user login session is logged out or not
 include("logout_chk.php");
+include("user_chk.php");
 //current user session assign to a variable
 $user=$_SESSION["AdmID"]; 
 
-$lid=$_GET["lid"];
-$id=$_GET["id"];
-$msg=$_GET['msg'];
-$act=$_GET['action'];
-include("user_chk.php");
+if(is_array($_GET))
+
+{
+foreach($_GET as $var=>$valu)
+{
+//grabs the $_GET variables and adds slashes
+$$var = addslashes($valu);
+}
+}
 //gets the current date 
 	$curdate=date("Y-m-d");
 
@@ -35,52 +40,43 @@ $$var = addslashes($valu);
 					    {
 						
 								
-$fql="SELECT * FROM warrants WHERE warrant_no='$warrant_no'";
-$fel=mysql_query($fql);
-$row=mysql_affected_rows();
+$fql="SELECT * FROM variants WHERE vtype='category' AND name='$variants'";
+$fel=mysqli_query($con,$fql);
+$row=mysqli_affected_rows($con);
 if($row>0)
 {
-$msg1="$warrant_no Already Exhist..!";
+$msg1="$variants Already Exhist..!";
 
 }
 
 
 else{
-$fql1="SELECT * FROM loads WHERE id='$load_id'";
-$fel1=mysql_query($fql1);
-$felrow=mysql_fetch_object($fel1);
-$cuid=$felrow->customer_id;
+ 
 
-$insquery = "INSERT INTO warrants SET w_date='$curdate',load_id='$load_id',customer_id='$cuid',warrant_no='$warrant_no'";
+$insquery = "INSERT INTO variants SET vtype='$category', name='$variants'";
 
 
 
-			$insresult = mysql_query($insquery);
-			//message call for success
-			$Msg=1;
-			
-			$lastid = mysql_insert_id();
-			echo "<script>location.href='add_bundle.php?lid=$lastid&action=add'</script>";
-			
-			/*echo "<script>location.href='add_warrant.php?msg=$Msg&action=add'</script>";*/
+$insresult = mysqli_query($con,$insquery);
+//message call for success
+$Msg=1;
+echo "<script>location.href='add_variants.php?msg=$Msg'</script>";
+
 	 
 }
- 
-			
-	 }
-	
 
- 
 
+}
+ 
 if($id)
 		
 {
-$query = "UPDATE warrants SET w_date='$curdate',load_id='$load_id',warrant_no='$warrant_no' where id='$id'";
+$query = "UPDATE variants_type SET vtype='$category', name='$variants' where id='$id'";
 
-			$result = mysql_query($query);
+			$result = mysqli_query($con,$query);
 			//message call for success
 			$Msg=2;
-			echo "<script>location.href='add_warrant.php?msg=$Msg&id=$id&action=edit'</script>";	  
+			echo "<script>location.href='manage_variants.php?msg=$Msg'</script>";	  
 			
 	}		
 	
@@ -91,10 +87,11 @@ $query = "UPDATE warrants SET w_date='$curdate',load_id='$load_id',warrant_no='$
 {
 
 /* get through the values */
-$sel="SELECT * FROM warrants WHERE id='$id'";
-$selqry=mysql_query($sel);
-$selrow=mysql_fetch_object($selqry);
-$lid=$selrow->load_id;
+$sel="SELECT * FROM variants WHERE id='$id'";
+$selqry=mysqli_query($con,$sel);
+$selrow=mysqli_fetch_object($selqry);
+echo $category=$selrow->vtype;
+echo $variants=$selrow->name;
 
 }
  
@@ -124,15 +121,15 @@ jQuery('.sm').fadeIn();
 jQuery('.sm').fadeIn();
 <? } ?>
 
-	$('#addwarrant').validate({ // initialize the plugin
+	$('#addType').validate({ // initialize the plugin
         rules: {
-		load_id: {
+		category: {
 		required: true,
 		},
 		 
-		warrant_no: {
+		variants: {
 		required: true,
-		number:true,
+		 
 		},
 		 
 	},
@@ -157,15 +154,15 @@ jQuery('.sm').fadeIn();
             <div id="page-wrapper">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header"><?php if($act==edit) { ?>Edit <? } if($act==view)  { ?>View <? } if($act==add) {?>Add <?php } ?>Warrant</h1>
+                        <h1 class="page-header"><?php if($action=='edit') { ?>Edit <? } if($action=='view')  { ?>View <? } else {?>Add <?php } ?>Types</h1>
                         <div class="alert alert-danger alert-dismissable login-alert" style="display:none">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                     <?php echo $msg1 ?><?php echo $msg11 ?>
                                 </div>
                                 <div class="alert alert-success alert-dismissable sm" style="display:none">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                    <? if($msg==1) { ?>Warrant Added Sucessfully!!!<? } ?>
-                                    <? if($msg==2) { ?>Warrant Updated Sucessfully!!!<? } ?>
+                                    <?php if($msg==1) { ?>Type Added Sucessfully!!!<? } ?>
+                                    <?php if($msg==2) { ?>Type Updated Sucessfully!!!<? } ?>
                                     
                                 </div>
                     </div>
@@ -180,28 +177,25 @@ jQuery('.sm').fadeIn();
                             </div>
                             <div class="panel-body">
                                 <div class="row">
-                                <form role="form" name="addwarrant" id="addwarrant" method="post" enctype="multipart/form-data">
+                                <form role="form" name="addType" id="addType" method="post" enctype="multipart/form-data">
 
                                                                         <!-- /.col-lg-6 (nested) -->
                                     <div class="col-lg-6">
-                                    <div class="form-group">
-                                            <label>Select a Load:</label>
-                                            <select class="form-control load" name="load_id" required <? if($act==view)  { ?>disabled <?php } ?>>
-                                             
-                                                <?php echo GetCombo("Load","loads","id","order_no","","id","$lid") ?>
-                                               </select>
+                              
+                                           <div class="form-group">
+                                            <label>Category Type#:</label>
+                                            <select required class="form-control" name="category"  <? if($action=='view')  { ?>disabled <?php } ?>>
+                                            <?php echo GetCombo("Category","variants_type","id","name","","id","$category") ?>
+                                            </select>
                                                
- 
-
-        </div>
-                                           
+                                            </div>
                                             <div class="form-group">
-                                            <label>Warrant Number:</label>
+                                            <label>Type Name:</label>
               
-                                               <input <? if($act==view)  { ?>disabled <?php } ?> type="number" class="form-control" placeholder="Warrant Number" name="warrant_no" value="<?php echo $selrow->warrant_no; ?>" required>
+                                               <input <? if($action=='view')  { ?>disabled <?php } ?> type="text" class="form-control" placeholder="Type Name" name="variants" value="<?php echo $selrow->name; ?>" required>
                                             </div>
                                           
-                                             <input <? if($act==view)  { ?>disabled <?php } ?> name="submit" type="submit" class="btn btn-primary" value="<?php if($id) { ?>Update<? } else { ?>Add<? } ?> Warrant">                                     
+                                             <input <? if($action=='view')  { ?>disabled <?php } ?> name="submit" type="submit" class="btn btn-primary" value="<?php if($id) { ?>Update<? } else { ?>Add<? } ?> Types">                                     
                                         
                                         
                                     </div>

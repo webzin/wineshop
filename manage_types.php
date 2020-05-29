@@ -23,7 +23,7 @@ include("top.php");
 		 $$var = addslashes($valu);
 		}
 	}
-		$sqlSelectclient="SELECT * FROM variants_type";
+		$sqlSelectclient="SELECT * FROM variants_type order by name ASC";
 		$selectclient=mysqli_query($con,$sqlSelectclient);
 		$totrows=mysqli_affected_rows($con);
 	    
@@ -49,7 +49,7 @@ include("top.php");
 		jQuery('.login-alert').fadeOut(5000);
 		<? } ?>
 
-<? if($msg==1) { ?>
+<? if($msg==1 || $msg==2 ) { ?>
 
 		jQuery('.sm').fadeIn(1000);
 
@@ -105,7 +105,7 @@ include("top.php");
                                         
                                         <tbody>
                                         <?php 
-	   $i=0;
+	   $i=1;
 	  while($resultclient=mysqli_fetch_object($selectclient))
         	  {
 			
@@ -122,11 +122,11 @@ include("top.php");
 		 
           
                                             <tr class="<?php echo $class; ?>" id="<? echo stripslashes($resultclient->id); ?>">
-                                                <td><? echo stripslashes($resultclient->id); ?></td>
+                                                <td><? echo $i; ?></td>
                                                 <td><? echo stripslashes($resultclient->name); ?></td>
                                                 <td class="center">
-												<a class="btn btn-success btn-circle" href="add_warrant.php?action=view&id=<? echo stripslashes($resultclient->id); ?>"><i class="fa fa-search"></i></a>
-												<a class="btn btn-info btn-circle" href="add_warrant.php?action=edit&id=<? echo stripslashes($resultclient->id); ?>"><i class="fa fa-edit"></i></a>
+												<a class="btn btn-success btn-circle" href="add_types.php?action=view&id=<? echo stripslashes($resultclient->id); ?>"><i class="fa fa-search"></i></a>
+												<a class="btn btn-info btn-circle" href="add_types.php?action=edit&id=<? echo stripslashes($resultclient->id); ?>"><i class="fa fa-edit"></i></a>
 												<?php if($UTYPE=='A') {?>
  										<a href="javascript:void();" class="btn btn-danger btn-circle delwarrant"><i class="fa fa-times"></i></a>
 												<?php }?>												</td>

@@ -50,30 +50,53 @@
                             <li>
                                 <a href="manage_customer.php"><i class="fa fa-users fa-fw"></i> Stores<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
+                                    <li> <a href="add_stores.php"> Add Stores</a> </li>
+									
+                                    <li> <a href="manage_stores.php"> Manage Stores</a></li>
+									<li> <a href="manage_stocks.php"> Manage Stocks</a> </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                            <li>
+                                <a href="manage_brands.php"><i class="fa fa-tasks fa-fw"></i> Brands<span class="fa arrow"></span></a>
+                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="add_stores.php"> Add Stores</a>
+                                        <a href="add_brands.php"> Add Brands</a>
                                     </li>
 									
                                     <li>
-                                        <a href="manage_stores.php"> Manage Stores</a>
+                                        <a href="manage_brands.php"> Manage Brands</a>
+                                    </li>
+									
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+							<li>
+                                <a href="manage_types.php"><i class="fa fa-file-text fa-fw"></i>Types<span class="fa arrow"></span></a>
+                                 <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="add_types.php"> Add Types</a>
+                                    </li>
+									
+                                    <li>
+                                        <a href="manage_types.php"> Manage Types</a>
                                     </li>
 									
                                 </ul>
                                 <!-- /.nav-second-level -->
                             </li>
                             <li>
-                                <a href="manage_brands.php"><i class="fa fa-tasks fa-fw"></i> Brands<span class="fa arrow"></span></a>
-                                 
-                                <!-- /.nav-second-level -->
-                            </li>
-							<li>
-                                <a href="manage_types.php"><i class="fa fa-file-text fa-fw"></i>Types<span class="fa arrow"></span></a>
-                                 
-                                <!-- /.nav-second-level -->
-                            </li>
-                            <li>
                                 <a href="manage_variants.php"><i class="fa fa-glass fa-fw"></i> Variants<span class="fa arrow"></span></a>
-                                 
+                                 <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="add_variants.php"> Add Variants</a>
+                                    </li>
+									
+                                    <li>
+                                        <a href="manage_variants.php"> Manage Variants</a>
+                                    </li>
+									
+                                </ul>
                                 <!-- /.nav-second-level -->
                             </li>
                             <li>
@@ -128,3 +151,5 @@
                     </div>
                 </div>
             </nav>
+			
+		

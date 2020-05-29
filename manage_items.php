@@ -22,7 +22,7 @@ foreach($_POST as $var=>$valu)
 $$var = addslashes($valu);
 }
 }
-$sqlSelectclient="SELECT * FROM items";
+$sqlSelectclient="SELECT * FROM items order by item_name ASC";
 $selectclient=mysqli_query($con,$sqlSelectclient);
 $totrows=mysqli_affected_rows($con);
 
@@ -95,6 +95,7 @@ $totrows=mysqli_affected_rows($con);
                                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                         <thead>
                                             <tr>
+											<th>Sl No</th>
                                                 <th>Brand</th>
                                                 <th>Variants</th>
                                                 <th>Type</th>
@@ -111,7 +112,7 @@ $totrows=mysqli_affected_rows($con);
                                         
                                         <tbody>
                                         <?php 
-	   $i=0;
+	   $i=1;
 	  while($resultclient=mysqli_fetch_object($selectclient))
         	  {
 			
@@ -128,17 +129,18 @@ $totrows=mysqli_affected_rows($con);
 		 
           
                                             <tr class="<?php echo $class; ?>" id="<? echo stripslashes($resultclient->id); ?>">
-                                                <td><? echo GetName('brands','name','id',$resultclient->brand_id); ?></td>
-                                                <td><? echo GetName('variants','name','id',$resultclient->variant_id); ?></td>
-                                                <td><? echo GetName('variants_type','name','id',$resultclient->type_id); ?></td>
-                                                <td><? echo GetName('volume','name','id',$resultclient->vol_id); ?></td>
-                                                <td class="center"><? echo stripslashes($resultclient->buy_price); ?></td>
-                                                <td class="center"><? echo stripslashes($resultclient->wholesale_price); ?></td>
-												<td class="center"> <? echo stripslashes($resultclient->retail_price); ?></td>
-                                                <td><? echo stripslashes($resultclient->email); ?></td>
+											<td><?php echo $i; ?></td>
+                                                <td><?php echo GetName('brands','name','id',$resultclient->brand_id); ?></td>
+                                                <td><?php echo GetName('variants','name','id',$resultclient->variant_id); ?></td>
+                                                <td><?php echo GetName('variants_type','name','id',$resultclient->type_id); ?></td>
+                                                <td><?php echo GetName('volume','name','id',$resultclient->vol_id); ?></td>
+                                                <td class="center"><?php echo stripslashes($resultclient->buy_price); ?></td>
+                                                <td class="center"><?php echo stripslashes($resultclient->wholesale_price); ?></td>
+												<td class="center"> <?php echo stripslashes($resultclient->retail_price); ?></td>
+                                                <td><?php echo stripslashes($resultclient->email); ?></td>
 												<td class="center">
-												<a class="btn btn-success btn-circle" href="add_Items.php?action=view&id=<? echo stripslashes($resultclient->id); ?>"><i class="fa fa-search"></i></a>
-												<a class="btn btn-info btn-circle" href="add_Items.php?action=edit&id=<? echo stripslashes($resultclient->id); ?>"><i class="fa fa-edit"></i></a>
+												<a class="btn btn-success btn-circle" href="add_items.php?action=view&id=<?php echo stripslashes($resultclient->id); ?>"><i class="fa fa-search"></i></a>
+												<a class="btn btn-info btn-circle" href="add_items.php?action=edit&id=<?php echo stripslashes($resultclient->id); ?>"><i class="fa fa-edit"></i></a>
 												 
 														<?php if($UTYPE=='A') {?>
  										<a href="javascript:void();" class="btn btn-danger btn-circle delwarrant"><i class="fa fa-times"></i></a>

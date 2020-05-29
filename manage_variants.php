@@ -23,7 +23,7 @@ include("top.php");
 		 $$var = addslashes($valu);
 		}
 	}
-		$sqlSelectclient="SELECT * FROM variants";
+		$sqlSelectclient="SELECT * FROM variants order by name ASC";
 		$selectclient=mysqli_query($con,$sqlSelectclient);
 		$totrows=mysqli_affected_rows($con);
 	    
@@ -68,7 +68,7 @@ include("top.php");
             <?php include("nav.php"); ?>
 
             <div id="page-wrapper">
-                <div class="row">
+                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">Manage Variants</h1>
 						<div class="alert alert-danger alert-dismissable login-alert" style="display:none">
@@ -98,14 +98,15 @@ include("top.php");
                                         <thead>
                                             <tr>
                                              <th width="10%">Sl No</th>
-                                                <th>Variant Name</th>
+											<th>Variant Type</th>	
+											 <th>Variant Name</th>
                                                 <th>Options</th>
                                             </tr>
                                         </thead>
                                         
                                         <tbody>
                                         <?php 
-	   $i=0;
+	   $i=1;
 	  while($resultclient=mysqli_fetch_object($selectclient))
         	  {
 			
@@ -122,11 +123,12 @@ include("top.php");
 		 
           
                                             <tr class="<?php echo $class; ?>" id="<? echo stripslashes($resultclient->id); ?>">
-                                                <td><? echo stripslashes($resultclient->id); ?></td>
+                                                <td><? echo $i; ?></td>
+												<td><? echo $vname = GetName('variants_type','name','id',$resultclient->vtype); ?></td>
                                                 <td><? echo stripslashes($resultclient->name); ?></td>
                                                 <td class="center">
-												<a class="btn btn-success btn-circle" href="add_warrant.php?action=view&id=<? echo stripslashes($resultclient->id); ?>"><i class="fa fa-search"></i></a>
-												<a class="btn btn-info btn-circle" href="add_warrant.php?action=edit&id=<? echo stripslashes($resultclient->id); ?>"><i class="fa fa-edit"></i></a>
+												<a class="btn btn-success btn-circle" href="add_variants.php?action=view&id=<? echo stripslashes($resultclient->id); ?>"><i class="fa fa-search"></i></a>
+												<a class="btn btn-info btn-circle" href="add_variants.php?action=edit&id=<? echo stripslashes($resultclient->id); ?>"><i class="fa fa-edit"></i></a>
 												<?php if($UTYPE=='A') {?>
  										<a href="javascript:void();" class="btn btn-danger btn-circle delwarrant"><i class="fa fa-times"></i></a>
 												<?php }?>												</td>
@@ -143,40 +145,7 @@ include("top.php");
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
-                <!-- /.row -->
-                <div class="row">
-                    <div class="col-lg-6">
-                      <!-- /.panel -->
-                  </div>
-                <!-- /.col-lg-6 -->
-                    <div class="col-lg-6">
-                      <!-- /.panel -->
-                  </div>
-                  <!-- /.col-lg-6 -->
-                </div>
-                <!-- /.row -->
-                <div class="row">
-                    <div class="col-lg-6">
-                      <!-- /.panel -->
-                  </div>
-                <!-- /.col-lg-6 -->
-                    <div class="col-lg-6">
-                      <!-- /.panel -->
-                  </div>
-                  <!-- /.col-lg-6 -->
-                </div>
-                <!-- /.row -->
-                <div class="row">
-                    <div class="col-lg-6">
-                      <!-- /.panel -->
-                  </div>
-                <!-- /.col-lg-6 -->
-                    <div class="col-lg-6">
-                      <!-- /.panel -->
-                  </div>
-                  <!-- /.col-lg-6 -->
-                </div>
-                <!-- /.row -->
+                 
             </div>
             <!-- /#page-wrapper -->
 

@@ -1,13 +1,13 @@
 <?php
 //connect to database
- include("connect.php");
+ include("top.php"); 
  //check user login session is logged out or not
  include("logout_chk.php");
  //current user session assign to a variable
  $user=$_SESSION["AdmID"];
  	$id=$_GET["id"];
  ?>
-<?php include("top.php"); ?>
+
     </head>
     <body>
 
