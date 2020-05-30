@@ -3,11 +3,13 @@
 function GetName($tablename,$field,$where,$id)
 {	
  	global $con;
-	$uquery= mysqli_query($con,"SELECT * FROM $tablename WHERE $where='$id'");
-	$urow=mysqli_fetch_object($uquery);
+	$uquery="SELECT * FROM $tablename WHERE $where=$id";
+	$uresult=mysqli_query($con,$uquery);
+	$urow=mysqli_fetch_object($uresult);
 	mysqli_error($con);
 	$newval=stripslashes( $urow->$field);
  	return $newval;
+	 
 }
 
 function GetRand($tablename,$field,$limit)
@@ -41,6 +43,29 @@ function SumTotal($tablename, $columnname)
 	$newval = $urow['value_sum'];
 	return $newval;
 }
+
+function TotalStockInBystore($tbl, $colm, $whre, $cond, $whre2, $cond2)
+{
+	global $con;
+	$uquery="SELECT COALESCE(SUM($colm),0) AS value_sum FROM $tbl WHERE $whre='$cond' AND $whre2='$cond2'";
+	$uresult=mysqli_query($con,$uquery);
+	$urow=mysqli_fetch_assoc($uresult);
+	//echo mysqli_error();
+	$newval = $urow['value_sum'];
+	return $newval;
+}
+
+function TotalStockOutBystore($tbl, $colm, $whre, $cond, $whre2, $cond2)
+{
+	global $con;
+ 	$uquery="SELECT COALESCE(SUM($colm),0) AS value_sum FROM $tbl WHERE $whre='$cond' AND $whre2='$cond2'";
+	$uresult=mysqli_query($con,$uquery);
+	$urow=mysqli_fetch_assoc($uresult);
+	//echo mysqli_error();
+	$newval = $urow['value_sum'];
+	return $newval;
+}
+
 
  
 function GetCount($tablename)

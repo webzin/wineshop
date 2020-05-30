@@ -93,6 +93,22 @@ CREATE TABLE `day_cash` (
 
 insert  into `day_cash`(`id`,`date`,`store_id`,`cash_meta`,`amount`) values (1,'2018-05-29',1,'63',-65454),(2,'2018-05-29',1,'64',-9879),(3,'2018-05-29',1,'6',100000),(4,'2018-05-28',1,'64',-5),(5,'2018-05-28',1,'63',10),(6,'2018-05-28',1,'63',11),(7,'2018-05-29',1,'64',2121);
 
+/*Table structure for table `govt_report` */
+
+DROP TABLE IF EXISTS `govt_report`;
+
+CREATE TABLE `govt_report` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `store_id` int(11) DEFAULT NULL,
+  `variant_type_id` int(11) DEFAULT NULL,
+  `total_stock` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
+
+/*Data for the table `govt_report` */
+
+insert  into `govt_report`(`id`,`store_id`,`variant_type_id`,`total_stock`) values (1,21,1,121),(2,11,1,90),(3,11,8,25),(4,10,1,121),(5,11,1,90),(6,11,8,25),(7,10,1,121),(8,11,1,90),(9,11,8,25),(10,10,1,121),(11,11,1,90),(12,11,8,25);
+
 /*Table structure for table `items` */
 
 DROP TABLE IF EXISTS `items`;
@@ -109,11 +125,11 @@ CREATE TABLE `items` (
   `retail_price` int(11) DEFAULT NULL,
   `current_stock` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 /*Data for the table `items` */
 
-insert  into `items`(`id`,`brand_id`,`type_id`,`variant_id`,`vol_id`,`item_name`,`buy_price`,`wholesale_price`,`retail_price`,`current_stock`) values (1,2,1,16,6,'Officer\'s Choice Strong Beer Beer 750ml',123,130,145,NULL),(2,4,1,16,6,'Old Smuggler Strong Beer Beer 750ml',123,134,145,NULL),(3,10,8,13,3,'Bacardi Artois Breezer 180ml',111,211,234,NULL),(4,9,2,2,2,'Lion Daddy Supreme Super Stong Beer Vodka 90ml',10,11,12,NULL);
+insert  into `items`(`id`,`brand_id`,`type_id`,`variant_id`,`vol_id`,`item_name`,`buy_price`,`wholesale_price`,`retail_price`,`current_stock`) values (1,2,1,16,6,'Officer\'s Choice Strong Beer Beer 750ml',123,130,145,NULL),(2,4,1,16,6,'Old Smuggler Strong Beer Beer 750ml',123,134,145,NULL),(3,10,8,13,3,'Bacardi Artois Breezer 180ml',111,211,234,NULL),(4,9,2,2,2,'Lion Daddy Supreme Super Stong Beer Vodka 90ml',10,11,12,NULL),(5,3,1,12,9,'Sterling Beer Beer 500ml',100,110,120,NULL);
 
 /*Table structure for table `log` */
 
@@ -155,7 +171,7 @@ CREATE TABLE `stock_in` (
 
 /*Data for the table `stock_in` */
 
-insert  into `stock_in`(`id`,`date`,`item_id`,`qty`,`chalan_no`,`depo_chalan_file`,`depo_user_id`,`store_id`,`store_user_id`,`store_chalan_file`,`store_accepted`) values (1,'2018-05-17',8,11,5649879,NULL,74,10,77,NULL,'Y'),(2,'2018-05-17',12,55,98795456,NULL,74,10,77,NULL,'N'),(3,'2018-05-17',8,55,23123578,NULL,74,10,77,NULL,'N'),(4,'2018-05-30',6,10,65565656,NULL,74,11,78,NULL,'Y'),(5,'2018-05-30',2,80,1564532,NULL,74,11,78,NULL,'N'),(6,'2018-05-30',10,25,1254521,NULL,74,11,78,NULL,'Y');
+insert  into `stock_in`(`id`,`date`,`item_id`,`qty`,`chalan_no`,`depo_chalan_file`,`depo_user_id`,`store_id`,`store_user_id`,`store_chalan_file`,`store_accepted`) values (1,'2018-05-17',1,11,5649879,NULL,74,10,77,NULL,'Y'),(2,'2018-05-17',1,55,98795456,NULL,74,10,77,NULL,'N'),(3,'2018-05-17',1,55,23123578,NULL,74,10,77,NULL,'N'),(4,'2018-05-30',2,10,65565656,NULL,74,11,78,NULL,'Y'),(5,'2018-05-30',2,80,1564532,NULL,74,11,78,NULL,'N'),(6,'2018-05-30',3,25,1254521,NULL,74,11,78,NULL,'Y');
 
 /*Table structure for table `stock_items` */
 
@@ -185,7 +201,7 @@ DROP TABLE IF EXISTS `stock_out`;
 CREATE TABLE `stock_out` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `date` date DEFAULT NULL,
-  `item` int(11) DEFAULT NULL,
+  `item_id` int(11) DEFAULT NULL,
   `qty` int(20) DEFAULT NULL,
   `sale_type` varchar(25) DEFAULT NULL,
   `store_id` int(11) DEFAULT NULL,
@@ -195,26 +211,26 @@ CREATE TABLE `stock_out` (
 
 /*Data for the table `stock_out` */
 
-insert  into `stock_out`(`id`,`date`,`item`,`qty`,`sale_type`,`store_id`,`store_user_id`) values (1,'2018-05-17',63,56546546,'4545',2,NULL),(2,'2018-05-17',64,45545455,'7878',2,NULL),(3,'2018-05-17',64,655487,'4578',2,NULL),(4,'2018-05-30',6,12313,'3213',6,NULL),(5,'2018-05-30',64,55656,'665',4,NULL),(6,'2018-05-30',63,123,'12',2,NULL);
+insert  into `stock_out`(`id`,`date`,`item_id`,`qty`,`sale_type`,`store_id`,`store_user_id`) values (1,'2018-05-17',1,2,'W',2,2),(2,'2018-05-17',1,2,'R',2,2),(3,'2018-05-17',1,2,'R',2,2),(4,'2018-05-30',2,2,'W',6,6),(5,'2018-05-30',2,2,'R',4,4),(6,'2018-05-30',2,2,'W',2,2);
 
-/*Table structure for table `store` */
+/*Table structure for table `stock_request` */
 
-DROP TABLE IF EXISTS `store`;
+DROP TABLE IF EXISTS `stock_request`;
 
-CREATE TABLE `store` (
+CREATE TABLE `stock_request` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `address` varchar(255) DEFAULT NULL,
-  `city` varchar(111) DEFAULT NULL,
-  `state` varchar(111) DEFAULT NULL,
-  `country` varchar(22) DEFAULT NULL,
-  `zip` int(7) DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `item_id` int(11) DEFAULT NULL,
+  `qty` int(20) DEFAULT NULL,
+  `store_user_id` int(11) DEFAULT NULL,
+  `vol_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
-/*Data for the table `store` */
+/*Data for the table `stock_request` */
 
-insert  into `store`(`id`,`name`,`address`,`city`,`state`,`country`,`zip`) values (1,'Nayapalli','Nh5','bhubaneswar','odisha','india',751012),(2,'Patia','patia square','bhubaneswar','odisha','india',751024),(3,'Laxmisagar','laxmi sagar square','bhubaneswar','odisha','india',751008);
+insert  into `stock_request`(`id`,`date`,`store_id`,`item_id`,`qty`,`store_user_id`,`vol_id`) values (1,'2018-05-17',10,8,11,77,NULL),(2,'2018-05-17',10,12,55,77,NULL),(3,'2018-05-17',10,8,55,77,NULL),(4,'2018-05-30',11,6,10,78,NULL),(5,'2018-05-30',11,2,80,78,NULL),(6,'2018-05-30',11,10,25,78,NULL);
 
 /*Table structure for table `stores` */
 
@@ -302,28 +318,15 @@ DROP TABLE IF EXISTS `volume`;
 CREATE TABLE `volume` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
+  `pkt` varchar(255) DEFAULT NULL,
+  `pkt_qty` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQUE` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 /*Data for the table `volume` */
 
-insert  into `volume`(`id`,`name`) values (3,'180ml'),(7,'275ml'),(8,'330ml'),(4,'375ml'),(9,'500ml'),(5,'650ml'),(10,'650ml DEF'),(6,'750ml'),(12,'750ml DEF'),(2,'90ml');
-
-/*Table structure for table `volume-size` */
-
-DROP TABLE IF EXISTS `volume-size`;
-
-CREATE TABLE `volume-size` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `UNIQUE` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
-
-/*Data for the table `volume-size` */
-
-insert  into `volume-size`(`id`,`name`) values (3,'180ml'),(7,'275ml'),(8,'330ml'),(4,'375ml'),(9,'500ml'),(5,'650ml'),(10,'650ml DEF'),(6,'750ml'),(12,'750ml DEF'),(2,'90ml');
+insert  into `volume`(`id`,`name`,`pkt`,`pkt_qty`) values (2,'90ml','SMALL',60),(3,'180ml','SMALL',40),(4,'375ml','MEDIUM',30),(5,'650ml','BIG',12),(6,'750ml','BIG',12),(7,'275ml','SMALL',50),(8,'330ml','MEDIUM',30),(9,'500ml','MEDIUM-BIG',20),(10,'650ml DEF','BIG',12),(12,'750ml DEF','BIG',10);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

@@ -141,7 +141,9 @@
 									<li>
                                         <a href="stock_report.php?type=variant"><i class="fa fa-pie-chart fa-fw"></i>Variantwise Stock Report</a>
                                     </li>
-									
+									<li>
+                                        <a href="govt_stock_report.php"><i class="fa fa-pie-chart fa-fw"></i>Govt Stock Report</a>
+                                    </li>
                                 </ul>
                                 <!-- /.nav-second-level -->
                             </li>
