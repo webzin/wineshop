@@ -119,6 +119,9 @@ jQuery('.sm').fadeIn();
  
 jQuery('.sm').fadeIn();
 <? } ?>
+<? if($msg==3)  { ?>
+jQuery('.em').fadeIn();
+<? } ?>
 
 	$('#addBrand').validate({ // initialize the plugin
         rules: {
@@ -154,7 +157,7 @@ jQuery('.sm').fadeIn();
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header"><?php if($action=='edit') { ?>Edit <? } if($action=='view')  { ?>View <? } else {?>Add <?php } ?>Brands</h1>
-                        <div class="alert alert-danger alert-dismissable login-alert" style="display:none">
+                        <div class="alert alert-danger alert-dismissable login-alert em" style="display:none">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                     <?php echo $msg1 ?><?php echo $msg11 ?>
                                 </div>
