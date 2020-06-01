@@ -1,74 +1,24 @@
 <?php
-//connect to database
-include("connect.php"); 
-
+include ("connect.php");
 //gets the current date 
-$curdate=date("Y-m-d");
+	$curdate=date("Y-m-d");
+	$user_id='11';
+for($i = 0; $i < count($_POST['item_id']); $i++)
+{	
+    echo $store_id = mysqli_real_escape_string($con, $_POST['store_id'][$i]);
+    echo $item_id = mysqli_real_escape_string($con, $_POST['item_id'][$i]);
+    echo $qty = mysqli_real_escape_string($con, $_POST['qty'][$i]);
 
-//loop throgh post values
-if(is_array($_POST))
+    echo $sql = "INSERT INTO stock_inventory SET store_id='$store_id', `date`='$curdate', item_id='$item_id', qty='$qty', depo_user_id='$user_id'";
+    mysqli_query($con, $sql);
+}
 
+if(mysqli_error($con))
 {
-foreach($_POST as $var=>$valu)
+    echo "Data base error occured";
+}
+else
 {
-//grabs the $_POST variables and adds slashes
-$$var = addslashes($valu);
+    echo $i . " rows added";
 }
-}
-	if($_POST["submit"])
-	{
-
-		if(!$id)
-		
-					    {
-						
-								
-$fql="SELECT * FROM variants WHERE vtype='category' AND name='$variants'";
-$fel=mysqli_query($con,$fql);
-$row=mysqli_affected_rows($con);
-if($row>0)
-{
-$msg1="$variants Already Exhist..!";
-
-}
-
-
-else{
- 
-
-$insquery = "INSERT INTO variants SET vtype='$category', name='$variants'";
-
-
-
-$insresult = mysqli_query($con,$insquery);
-//message call for success
-
-echo "Record Added Sucessfully";
-
-	 
-}
-
-
-}
- 
-if($id)
-		
-{
-$query = "UPDATE variants_type SET vtype='$category', name='$variants' where id='$id'";
-
-			$result = mysqli_query($con,$query);
-			//message call for success
-
-			echo "Record Updated Sucessfully";	  
-			
-	}		
-	
- 
-}
- 
- 
- 
- 
- 
- ?>
- 
+?>

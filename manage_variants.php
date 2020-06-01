@@ -50,9 +50,6 @@ else{
  
 
 $insquery = "INSERT INTO variants SET vtype='$category', name='$variants'";
-
-
-
 $insresult = mysqli_query($con,$insquery);
 //message call for success
 $Msg=1;
@@ -190,7 +187,7 @@ $variants=$selrow->name;
 
 					  <div class="alert alert-danger alert-dismissable login-alert em" style="display:none">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                    <?php echo $msg1 ?><?php echo $msg11 ?>
+                                    <?php echo $msg1 ?><?php echo $msg11; ?>
                                 </div>
                                 <div class="alert alert-success alert-dismissable sm" style="display:none">
                                     <button Variant="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
