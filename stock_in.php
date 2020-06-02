@@ -20,13 +20,15 @@ jQuery(document).ready(function(){
   var i = 1;
             $('#add').click(function(){
                 i++;
-                $('#dynamic_field').append("<div id='row"+i+"' class='row'><div class='col-lg-3'><div class='form-group'><select class='form-control' name='item_id[]' required><?php echo $brandsel; ?></select></div></div><div class='col-lg-3'><div class='form-group'><input required type='number' class='form-control' placeholder='Quantity' name='qty[]' id='qty' value='<?php echo $qty; ?>'></div></div><div class='input-group-btn'><button id='"+i+"' class='btn btn-danger btn_remove' type='button' name='remove' > <span class='glyphicon glyphicon-minus' aria-hidden='true'></span> </button></div></div>");
+                $('#dynamic_field').append("<div id='row"+i+"' class='row'><div class='col-lg-3'><div class='form-group'><select class='form-control' name='item_id[]' required><?php echo $brandsel; ?></select></div></div><div class='col-lg-3'><div class='form-group'><input required type='number' class='form-control' placeholder='Quantity' name='qty[]' id='qty' value='<?php echo $qty; ?>'></div></div><div class='col-lg-3'><div class='form-group'><input required type='text' class='form-control' placeholder='Chalan Number' name='chalan[]' id='chalan' value='<?php echo $chalan; ?>'></div></div><div class='input-group-btn'><button id='"+i+"' class='btn btn-danger btn_remove' type='button' name='remove' > <span class='glyphicon glyphicon-minus' aria-hidden='true'></span> </button></div></div>");
             });
 
             $(document).on('click','.btn_remove', function(){
                 var button_id = $(this).attr("id");
                 $("#row"+button_id+"").remove();
             });
+
+$('#loads').load('mobdata.php?action=ld', '', function(response, status, xhr) { });
 
 
 $('#additem').validate({
@@ -39,6 +41,9 @@ $('#additem').validate({
             required: true,
         },          
         qty: {
+            required: true,
+        },
+		chalan: {
             required: true,
         },
 		chalanfile: {
@@ -58,19 +63,7 @@ $('#additem').validate({
     }
 });
 
-           /* $('#submit').click(function(){
-                $.ajax({
-                    async: false,
-                    url: "add_data.php",
-                    method: "POST",
-                    data: $('#additem').serialize(),
-                    success:function(rt)
-                    {
-                        alert(rt);
-                        
-                    }
-                });
-            });*/
+         
   
   
 });
@@ -115,9 +108,29 @@ $('#additem').validate({
                                 
                                      <div class="row">
                                                                         <!-- /.col-lg-6 (nested) -->
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-3">
                                     <div class="form-group">
                                             <label>Select a Store#:</label>
+                                            <select class="form-control" name="store_id"  required>
+                                                <?php echo GetCombo("A Store","stores","id","name","","id","$store_id") ?>
+                                               </select>
+                                            </div>
+                                     
+                                    </div>
+									                                    <!-- /.col-lg-6 (nested) -->
+                                    <div class="col-lg-3">
+                                    <div class="form-group">
+                                            <label>Store Manager#:</label>
+                                            <select class="form-control" name="store_id"  required>
+                                                <?php echo GetCombo("A Store","stores","id","name","","id","$store_id") ?>
+                                               </select>
+                                            </div>
+                                     
+                                    </div>
+									
+									<div class="col-lg-3">
+                                    <div class="form-group">
+                                            <label>Depo Manager#:</label>
                                             <select class="form-control" name="store_id"  required>
                                                 <?php echo GetCombo("A Store","stores","id","name","","id","$store_id") ?>
                                                </select>
@@ -140,11 +153,17 @@ $('#additem').validate({
                                         <div class="col-lg-3">      
                                         <div class="form-group">
                                         
-                                        <input required type="number" class="form-control" placeholder="Quantity" name="qty[]" id="qty" value="<?php echo $qty; ?>"  <? if($action=='view')  { ?>disabled <?php } ?>>
+                                        <input required type="number" class="form-control" placeholder="Quantity" name="qty[]" id="qty" value="<?php echo $qty; ?>">
                                         
                                         </div>
                                         </div>
-                                         
+                                         <div class="col-lg-3">      
+                                        <div class="form-group">
+                                        
+                                        <input required type="text" class="form-control" placeholder="Chalan Number" name="chalan[]" id="chalan" value="<?php echo $chalan; ?>">
+                                        
+                                        </div>
+                                        </div>
                                         <div class="input-group-btn">
         <button class="btn btn-success" type="button"  name="add" id="add"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> </button>
       </div>
