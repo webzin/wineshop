@@ -1,28 +1,20 @@
 <?php
 //connect to database
- include("top.php");
- //check user login session is logged out or not
- include("logout_chk.php");
- //current user session assign to a variable
- $user=$_SESSION["AdmID"];
- 	$id=$_GET["id"];
-	 include("user_chk.php"); 
+include("top.php");
+//check user login session is logged out or not
+include("logout_chk.php");
+//current user session assign to a variable
+$user=$_SESSION["AdmID"];
+$id=$_GET["id"];
+include("user_chk.php"); 
 
-	//gets the current date 
-	$curdate=date("Y-m-d");
-	//get the message of the railcars page 
-	$msg=$_GET['msg'];
-	//loop throgh post values
-if(is_array($_POST))
-
-{
-//grabs the $_POST variables and adds slashes
-foreach($_POST as $var=>$valu)
-{
-$$var = addslashes($valu);
-}
-}
-$sqlSelectclient="SELECT * FROM items order by item_name ASC";
+//gets the current date 
+$curdate=date("Y-m-d");
+//get the message of the railcars page 
+$msg=$_GET['msg'];
+//loop throgh post values
+ 
+$sqlSelectclient="SELECT * FROM stock_inventory order by `date` ASC";
 $selectclient=mysqli_query($con,$sqlSelectclient);
 $totrows=mysqli_affected_rows($con);
 
@@ -34,7 +26,8 @@ $totrows=mysqli_affected_rows($con);
         <script>
             $(document).ready(function() {
                 $('#dataTables-example').DataTable({
-                        responsive: true
+                        responsive: true,
+						pageLength: 100
                 });
             });
 
@@ -87,7 +80,7 @@ $totrows=mysqli_affected_rows($con);
                     <div class="col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                Item Details
+                               <?php echo GetName('stores','name','id',11); ?>
                             </div>
                             <!-- /.panel-heading -->
                             <div class="panel-body">
@@ -96,16 +89,17 @@ $totrows=mysqli_affected_rows($con);
                                         <thead>
                                             <tr>
 											<th>Sl No</th>
-                                                <th>Brand</th>
-                                                <th>Variants</th>
+											<th>Date</th>
+                                                <th>Store Name</th>
+                                                <th>Item Name</th>
                                                 <th>Type</th>
-                                                <th>Volume</th>
-                                                <th>B Price</th>
-                                                <th>W Price</th>
-												<th>R Price</th>
-                                                <th>Stock</th>
+                                                <th>Quantity</th>
+                                                <th>In Out</th>
+                                                <th>Chalan No</th>
+												<th>Accepted</th>
+                                                <th>Current Stock</th>
 												
-												<th>Options</th>
+												<th>Edit</th>
 
                                             </tr>
                                         </thead>
@@ -130,21 +124,19 @@ $totrows=mysqli_affected_rows($con);
           
                                             <tr class="<?php echo $class; ?>" id="<? echo stripslashes($resultclient->id); ?>">
 											<td><?php echo $i; ?></td>
-                                                <td><?php echo GetName('brands','name','id',$resultclient->brand_id); ?></td>
-                                                <td><?php echo GetName('variants','name','id',$resultclient->variant_id); ?></td>
-                                                <td><?php echo GetName('variants_type','name','id',$resultclient->type_id); ?></td>
-                                                <td><?php echo GetName('volume','name','id',$resultclient->vol_id); ?></td>
-                                                <td class="center"><?php echo stripslashes($resultclient->buy_price); ?></td>
-                                                <td class="center"><?php echo stripslashes($resultclient->wholesale_price); ?></td>
-												<td class="center"> <?php echo stripslashes($resultclient->retail_price); ?></td>
-                                                <td><?php echo stripslashes($resultclient->email); ?></td>
-												<td class="center">
-												<a class="btn btn-success btn-circle" href="add_items.php?action=view&id=<?php echo stripslashes($resultclient->id); ?>"><i class="fa fa-search"></i></a>
-												<a class="btn btn-info btn-circle" href="add_items.php?action=edit&id=<?php echo stripslashes($resultclient->id); ?>"><i class="fa fa-edit"></i></a>
+											<td class="center"><?php echo $resultclient->date; ?></td>
+                                                <td><?php echo GetName('stores','name','id',$resultclient->store_id); ?></td>
+                                                <td><?php echo GetName('items','item_name','id',$resultclient->item_id); ?></td>
+                                                <td><?php $vid=GetName('items','type_id','id',$resultclient->item_id); echo GetName('variants_type','name','id',$vid); ?></td>
+                                                <td><?php echo stripslashes($resultclient->qty); ?></td>
+                                                <td class="center"><?php echo stripslashes($resultclient->in_out); ?></td>
+                                                <td class="center"><?php echo stripslashes($resultclient->chalan_no); ?></td>
+												<td class="center"> <?php echo stripslashes($resultclient->store_accepted); ?></td>
+                                                <td><?php echo GetName('items','current_stock','id',$resultclient->item_id); ?></td>
+												<td class="center"> 
+												<a class="btn btn-info btn-circle" href="manage_stocks.php?action=edit&id=<?php echo stripslashes($resultclient->id); ?>"><i class="fa fa-edit"></i></a>
 												 
-														<?php if($UTYPE=='A') {?>
- 										<a href="javascript:void();" class="btn btn-danger btn-circle delwarrant"><i class="fa fa-times"></i></a>
-												<?php }?>
+														 
                                                  
 												</td>
                                             </tr>
