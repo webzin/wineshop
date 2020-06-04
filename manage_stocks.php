@@ -14,7 +14,7 @@ $curdate=date("Y-m-d");
 $msg=$_GET['msg'];
 //loop throgh post values
  
-$sqlSelectclient="SELECT * FROM stock_inventory order by `date` ASC";
+$sqlSelectclient="SELECT * FROM stock_inventory order by `id` ASC";
 $selectclient=mysqli_query($con,$sqlSelectclient);
 $totrows=mysqli_affected_rows($con);
 
@@ -61,14 +61,11 @@ $totrows=mysqli_affected_rows($con);
             <div id="page-wrapper">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Manage Items</h1>
-						<div class="alert alert-danger alert-dismissable login-alert" style="display:none">
-                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                    Item Deleted
-                                </div>
+                        <h1 class="page-header">Manage Stocks</h1>
+						 
                                 <div class="alert alert-success alert-dismissable sm" style="display:none">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                    <? if($msg==1) { ?>Item Added Sucessfully!!!<? } ?>
+                                   
                                     <? if($msg==2) { ?>Item Updated Sucessfully!!!<? } ?>
                                     
                                 </div>
@@ -93,12 +90,10 @@ $totrows=mysqli_affected_rows($con);
                                                 <th>Store Name</th>
                                                 <th>Item Name</th>
                                                 <th>Type</th>
-                                                <th>Quantity</th>
-                                                <th>In Out</th>
+                                                <th>In Qty</th>
+                                                <th>Out Qty</th>
                                                 <th>Chalan No</th>
-												<th>Accepted</th>
-                                                <th>Current Stock</th>
-												
+												<th>Balance</th>
 												<th>Edit</th>
 
                                             </tr>
@@ -128,11 +123,10 @@ $totrows=mysqli_affected_rows($con);
                                                 <td><?php echo GetName('stores','name','id',$resultclient->store_id); ?></td>
                                                 <td><?php echo GetName('items','item_name','id',$resultclient->item_id); ?></td>
                                                 <td><?php $vid=GetName('items','type_id','id',$resultclient->item_id); echo GetName('variants_type','name','id',$vid); ?></td>
-                                                <td><?php echo stripslashes($resultclient->qty); ?></td>
-                                                <td class="center"><?php echo stripslashes($resultclient->in_out); ?></td>
+                                                <td class="center"><?php echo stripslashes($resultclient->in_qty); ?></td>
+                                                <td class="center"><?php echo stripslashes($resultclient->out_qty); ?></td>
                                                 <td class="center"><?php echo stripslashes($resultclient->chalan_no); ?></td>
-												<td class="center"> <?php echo stripslashes($resultclient->store_accepted); ?></td>
-                                                <td><?php echo GetName('items','current_stock','id',$resultclient->item_id); ?></td>
+												<td class="center"> <?php echo stripslashes($resultclient->stock_bal); ?></td>
 												<td class="center"> 
 												<a class="btn btn-info btn-circle" href="manage_stocks.php?action=edit&id=<?php echo stripslashes($resultclient->id); ?>"><i class="fa fa-edit"></i></a>
 												 

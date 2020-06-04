@@ -186,7 +186,7 @@
                 <div class="panel-body">
                <div class="dataTable_wrapper">
 				<?php  
-				$cusqry="SELECT * FROM users where type='STORE' ORDER BY id DESC LIMIT 0, 5";
+				$cusqry="SELECT *, SUM(IF(in_out='IN',qty,NULL)) AS instok, SUM(IF(in_out='OUT',qty,NULL)) AS outstok FROM stock_inventory GROUP BY `date` DESC LIMIT 0, 5";
                 $cusres=mysqli_query($con, $cusqry);
                 ?>
                                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
@@ -220,11 +220,12 @@
 		 
           
                                             <tr class="<?php echo $class; ?>" id="<?php echo stripslashes($resultclient->id); ?>">
-                                                <td><?php echo GetName('stores','name','id',$resultclient->store_id) ?></td>
-                                                <td><?php echo stripslashes($resultclient->name); ?></td>
-                                                <td><?php echo stripslashes($resultclient->email); ?></td>
-                                                
-                                                <td><?php echo stripslashes($resultclient->mobile); ?></td>
+                                                 
+                                                <td><?php $phpdate = strtotime( $resultclient->date ); echo $mysqldate = date( 'd-m-Y', $phpdate );?></td>
+                                                <td><?php echo $resultclient->instok; ?></td>
+												<td><?php echo $resultclient->outstok; ?></td>
+                                                 
+                                                <td><?php echo SumTotal('items', 'current_stock'); ?></td>
 												
 												
                                             </tr>
@@ -245,7 +246,7 @@
                 <div class="panel-body">
                <div class="dataTable_wrapper">
 				<?php  
-				$cusqry="SELECT * FROM users where type='STORE' ORDER BY id DESC LIMIT 0, 5";
+				$cusqry="SELECT *,MONTH(`date`) AS m, SUM(IF(in_out='IN',qty,NULL)) AS instok, SUM(IF(in_out='OUT',qty,NULL)) AS outstok FROM stock_inventory GROUP BY m DESC LIMIT 0, 5";
                 $cusres=mysqli_query($con, $cusqry);
                 ?>
                                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
@@ -279,11 +280,12 @@
 		 
           
                                             <tr class="<?php echo $class; ?>" id="<?php echo stripslashes($resultclient->id); ?>">
-                                                <td><?php echo GetName('stores','name','id',$resultclient->store_id) ?></td>
-                                                <td><?php echo stripslashes($resultclient->name); ?></td>
-                                                <td><?php echo stripslashes($resultclient->email); ?></td>
-                                                
-                                                <td><?php echo stripslashes($resultclient->mobile); ?></td>
+                                                 
+                                                <td><?php echo date("F", mktime(null, null, null, $resultclient->m)); ?></td>
+                                                <td><?php echo $resultclient->instok; ?></td>
+												<td><?php echo $resultclient->outstok; ?></td>
+                                                 
+                                                <td><?php echo SumTotal('items', 'current_stock'); ?></td>
 												
 												
                                             </tr>
@@ -308,7 +310,7 @@
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
-                     <?php 		$sqlwrnts="SELECT * FROM stock_in ORDER BY id DESC LIMIT 0, 5";
+                     <?php 		$sqlwrnts="SELECT * FROM stock_inventory WHERE in_out='IN' ORDER BY `date` DESC LIMIT 0, 5";
 			$selwrnt=mysqli_query($con,$sqlwrnts);
 			$wrntrows=mysqli_affected_rows($con);
 			?>
@@ -363,12 +365,12 @@
                 <div class="col-lg-6">
                 <div class="panel panel-default">
                 <div class="panel-heading">
-                <i class="fa fa-sign-in fa-fw"></i> Recent Stock Out
+                <i class="fa fa-file-text fa-fw"></i> Recent Stock Out
                 
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
-                     <?php 		$sqlwrnts="SELECT * FROM stock_in ORDER BY id DESC LIMIT 0, 5";
+                     <?php 		$sqlwrnts="SELECT * FROM stock_inventory WHERE in_out='OUT' ORDER BY `date` DESC LIMIT 0, 5";
 			$selwrnt=mysqli_query($con,$sqlwrnts);
 			$wrntrows=mysqli_affected_rows($con);
 			?>
@@ -379,7 +381,7 @@
                                                 <th>Store Name</th>
                                                 <th>Item Name</th>
                                                 <th>Quantity</th>
-                                                <th>Chalan No</th>
+                                                <th>Sale Type</th>
                                                
 
                                             </tr>
@@ -408,7 +410,7 @@
 												<td><?php echo GetName('stores','name','id',$reswrnt->store_id) ?></td>
                                                 <td><?php echo GetName('items','item_name','id',$reswrnt->item_id) ?></td>
                                                 <td><?php echo stripslashes($reswrnt->qty); ?></td>
-                                                <td><?php echo stripslashes($reswrnt->chalan_no); ?></td>
+                                                <td><?php echo stripslashes($reswrnt->sale_type); ?></td>
                                                 
 											
 												

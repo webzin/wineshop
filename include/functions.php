@@ -11,6 +11,16 @@ function GetName($tablename,$field,$where,$id)
  	return $newval;
 	 
 }
+function StoreStockBal($tbl, $col1, $col2, $whre )
+{
+	global $con;
+	echo $uquery="SELECT (SUM(`$col1`) - SUM(`$col2`)) AS value_sum FROM $tbl WHERE $whre ";
+	$uresult=mysqli_query($con,$uquery);
+	$urow=mysqli_fetch_assoc($uresult);
+	//echo mysqli_error();
+	$newval = $urow['value_sum'];
+	return $newval;
+}
 
 function GetRand($tablename,$field,$limit)
 {	
@@ -36,7 +46,18 @@ function GetTotal($tablename,$where,$name)
 function SumTotal($tablename, $columnname)
 {
 	global $con;
-	$uquery="SELECT SUM($columnname) AS value_sum FROM $tablename ";
+	$uquery="SELECT SUM($columnname) AS value_sum FROM $tablename";
+	$uresult=mysqli_query($con,$uquery);
+	$urow=mysqli_fetch_assoc($uresult);
+	//echo mysqli_error();
+	$newval = $urow['value_sum'];
+	return $newval;
+}
+ 
+function TotalStock($tbl, $colm, $whre, $cond)
+{
+	global $con;
+	echo $uquery="SELECT COALESCE(SUM($colm),0) AS value_sum FROM $tbl WHERE $whre ";
 	$uresult=mysqli_query($con,$uquery);
 	$urow=mysqli_fetch_assoc($uresult);
 	//echo mysqli_error();
@@ -44,27 +65,6 @@ function SumTotal($tablename, $columnname)
 	return $newval;
 }
 
-function TotalStockInBystore($tbl, $colm, $whre, $cond, $whre2, $cond2)
-{
-	global $con;
-	$uquery="SELECT COALESCE(SUM($colm),0) AS value_sum FROM $tbl WHERE $whre='$cond' AND $whre2='$cond2'";
-	$uresult=mysqli_query($con,$uquery);
-	$urow=mysqli_fetch_assoc($uresult);
-	//echo mysqli_error();
-	$newval = $urow['value_sum'];
-	return $newval;
-}
-
-function TotalStockOutBystore($tbl, $colm, $whre, $cond, $whre2, $cond2)
-{
-	global $con;
- 	$uquery="SELECT COALESCE(SUM($colm),0) AS value_sum FROM $tbl WHERE $whre='$cond' AND $whre2='$cond2'";
-	$uresult=mysqli_query($con,$uquery);
-	$urow=mysqli_fetch_assoc($uresult);
-	//echo mysqli_error();
-	$newval = $urow['value_sum'];
-	return $newval;
-}
 
 
  

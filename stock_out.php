@@ -20,7 +20,7 @@ jQuery(document).ready(function(){
   var i = 1;
             $('#add').click(function(){
                 i++;
-                $('#dynamic_field').append("<div id='row"+i+"' class='row'><div class='col-lg-3'><div class='form-group'><select class='form-control' name='item_id[]' required><?php echo $brandsel; ?></select></div></div><div class='col-lg-3'><div class='form-group'><input required type='number' class='form-control' placeholder='Quantity' name='qty[]' id='qty' value='<?php echo $qty; ?>'></div></div><div class='col-lg-3'><div class='form-group'><input required type='text' class='form-control' placeholder='Chalan Number' name='chalan[]' id='chalan' value='<?php echo $chalan; ?>'></div></div><div class='input-group-btn'><button id='"+i+"' class='btn btn-danger btn_remove' type='button' name='remove' > <span class='glyphicon glyphicon-minus' aria-hidden='true'></span> </button></div></div>");
+                $('#dynamic_field').append("<div id='row"+i+"' class='row'><div class='col-lg-3'><div class='form-group'><select class='form-control' name='item_id[]' required><?php echo $brandsel; ?></select></div></div><div class='col-lg-3'><div class='form-group'><input required type='number' class='form-control' placeholder='Quantity' name='qty[]' id='qty' value='<?php echo $qty; ?>'></div></div><div class='col-lg-3'><div class='form-group'> <select class='form-control' name='sale_type[]' id='sale_type' required><option value=''>Select Sale Type</option><option value='W'>Wholesale</option><option value='R'>Retail</option></select></div></div><div class='input-group-btn'><button id='"+i+"' class='btn btn-danger btn_remove' type='button' name='remove' > <span class='glyphicon glyphicon-minus' aria-hidden='true'></span> </button></div></div>");
             });
 
             $(document).on('click','.btn_remove', function(){
@@ -83,7 +83,7 @@ $('#additem').validate({
             <div id="page-wrapper">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Stock Inward</h1>
+                        <h1 class="page-header">Stock Outward</h1>
 						 
                         <div class="alert alert-danger alert-dismissable login-alert" style="display:none">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -131,15 +131,7 @@ $('#additem').validate({
                                      
                                     </div>
 									
-									<div class="col-lg-3">
-                                    <div class="form-group">
-                                            <label>Depo Manager#:</label>
-                                            <select class="form-control" name="depo_id"  required>
-                                                <?php echo GetCombo("Depo Manager","users","id","name","type='DEPOT'","id","$depo_id"); ?>
-                                               </select>
-                                            </div>
-                                     
-                                    </div>
+								 
                                     </div>
                                     <div id="dynamic_field">
                                      <div class="row">
@@ -163,7 +155,11 @@ $('#additem').validate({
                                          <div class="col-lg-3">      
                                         <div class="form-group">
                                         
-                                        <input required type="text" class="form-control" placeholder="Chalan Number" name="chalan[]" id="chalan" value="<?php echo $chalan; ?>">
+                                        <select class="form-control" name="sale_type[]" id="sale_type" required>
+                                                <option value="">Select Sale Type</option>
+												<option value="W">Wholesale</option>
+												<option value="R">Retail</option>
+												</select>
                                         
                                         </div>
                                         </div>
@@ -173,14 +169,9 @@ $('#additem').validate({
                                     </div>
                                     </div>
                                     <div class="row">       
-                                
-                                <div class="col-lg-4">      
-                                <div class="form-group"> 
-                                <input name="chalanfile" class="form-control" type="file">  
-                                </div>
-                                </div>
+                             
                                 <div class="col-lg-12">       
-                          <input name="stockin" id="submit" type="submit" class="btn btn-primary" value="Stock In">   
+                          <input name="stockout" id="submit" type="submit" class="btn btn-primary" value="Stock Out">   
                                     </div>    
                                         
                                     </div>

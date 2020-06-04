@@ -2,18 +2,28 @@
 include ("connect.php");
 //gets the current date 
 	$curdate=date("Y-m-d");
-	$user_id='11';
+	 
+
+if (isset($_POST['stockin'])) {
+	 $store_id = mysqli_real_escape_string($con, $_POST['store_id']);
+	 $store_mgr = mysqli_real_escape_string($con, $_POST['store_mgr']);
+	 $depo_id = mysqli_real_escape_string($con, $_POST['depo_id']);
 for($i = 0; $i < count($_POST['item_id']); $i++)
 {	
-    echo $store_id = mysqli_real_escape_string($con, $_POST['store_id'][$i]);
-    echo $item_id = mysqli_real_escape_string($con, $_POST['item_id'][$i]);
-    echo $qty = mysqli_real_escape_string($con, $_POST['qty'][$i]);
-	echo $chalan = mysqli_real_escape_string($con, $_POST['chalan'][$i]);
-
-    echo $sql = "INSERT INTO stock_inventory SET store_id='$store_id', `date`='$curdate', item_id='$item_id', qty='$qty', chalan_no='$chalan', depo_user_id='$user_id'";
+ 
+    $item_id = mysqli_real_escape_string($con, $_POST['item_id'][$i]);
+    $qty = mysqli_real_escape_string($con, $_POST['qty'][$i]);
+	$chalan = mysqli_real_escape_string($con, $_POST['chalan'][$i]);
+ 	echo $stockbal = StoreStockBal('stock_inventory','in_qty','out_qty',"store_id=$store_id AND item_id=$item_id" ); 
+	echo $balstock = $stockbal + $qty;
+	
+    echo $sql = "INSERT INTO stock_inventory SET store_id='$store_id', `date`='$curdate', item_id='$item_id', in_qty='$qty', chalan_no='$chalan', depo_user_id='$depo_id', store_user_id='$store_mgr', store_accepted='YES', stock_bal='$balstock'";
     mysqli_query($con, $sql);
+	$upq = "UPDATE `items`, `stores` SET items.current_stock = items.current_stock + $qty, stores.total_stock = stores.total_stock + $qty
+WHERE items.id = $item_id AND stores.id = $store_id";
+	mysqli_query($con, $upq);
 }
-
+	
 if(mysqli_error($con))
 {
     echo "Data base error occured";
@@ -22,4 +32,36 @@ else
 {
     echo $i . " rows added";
 }
+}
+if (isset($_POST['stockout'])) {
+	 $store_id = mysqli_real_escape_string($con, $_POST['store_id']);
+	 $store_mgr = mysqli_real_escape_string($con, $_POST['store_mgr']);
+	 
+	for($i = 0; $i < count($_POST['item_id']); $i++)
+{	  
+     $item_id = mysqli_real_escape_string($con, $_POST['item_id'][$i]);
+     $qty = mysqli_real_escape_string($con, $_POST['qty'][$i]);
+	 $sale_type = mysqli_real_escape_string($con, $_POST['sale_type'][$i]);
+	 echo $stockbal = StoreStockBal('stock_inventory','in_qty','out_qty',"store_id=$store_id AND item_id=$item_id" ); 
+	 echo $balstock = $stockbal - $qty;
+	
+    echo $sql = "INSERT INTO stock_inventory SET store_id='$store_id', date='$curdate', item_id='$item_id', out_qty='$qty', sale_type='$sale_type', store_user_id='$store_mgr', stock_bal='$balstock'";
+    mysqli_query($con, $sql);
+	$upq = "UPDATE `items`, `stores` SET items.current_stock = items.current_stock - $qty, stores.total_stock = stores.total_stock - $qty
+WHERE items.id = $item_id AND stores.id = $store_id";
+	mysqli_query($con, $upq);
+
+}
+
+if(mysqli_error($con))
+{
+	echo mysqli_error($con);
+    echo "Data base error occured";
+}
+else
+{
+    echo $i . " rows added";
+}
+}
+	
 ?>
