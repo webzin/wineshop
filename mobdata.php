@@ -5,12 +5,26 @@ ob_start();
 header('Access-Control-Allow-Origin: *');
 
 include("connect.php");			
-$act=$_GET['action'];
-$email=$_GET['email'];
-$w=$_GET['wr'];
-$l=$_GET['ld'];
-$wd=$_GET['wd'];
 
+if(is_array($_GET))
+
+{
+foreach($_GET as $var=>$valu)
+{
+//grabs the $_GET variables and adds slashes
+$$var = addslashes($valu);
+}
+}
+
+if($action=='comp')
+
+//select query to get the values
+{
+ 
+
+echo GetName('stores','name','id',$sid);
+
+}
 
 if($act=='addr')
 
@@ -45,55 +59,57 @@ echo GetName(users,country,email,$email);
 
 }
 
-if($act=='lc')
+if($action=='sot')
 
  
 //select query to get the values
 {
 
-echo GetCount(loads);
+echo "100";
+//echo GetCount(loads);
 
 }
 
-if($act=='wc')
+if($action=='sit')
+
+//select query to get the values
+{
+echo "100";
+//echo GetCount(warrants);
+
+}
+
+if($action=='totstk')
+
+//select query to get the values
+{
+echo "100";
+//echo GetCount(bundles);
+}
+
+if($action=='brand')
+
+//select query to get the values
+{
+echo GetCombo("Brand","brands","id","name","","name","id");
+}
+
+if($action=='wtype')
 
 //select query to get the values
 {
 
-echo GetCount(warrants);
-
+echo GetCombo("Wine Type","variants_type","id","name","","name","id");
 }
 
-if($act=='bc')
+if($action=='wname')
 
 //select query to get the values
 {
 
-echo GetCount(bundles);
+echo GetCombo("Item Name","variants","id","name","","name","id");
 }
 
-if($act=='cn')
-
-//select query to get the values
-{
-echo GetCombo("Customer","users","id","compname","type='C'","compname","id");
-}
-
-if($act=='bu')
-
-//select query to get the values
-{
-
-echo GetCombo("Building","building","id","name","","id","id");
-}
-
-if($act=='ld')
-
-//select query to get the values
-{
-
-echo GetCombo("Load","loads","id","order_no","","id","$l");
-}
 if($act=='wr')
 
 //select query to get the values
