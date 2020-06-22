@@ -218,25 +218,25 @@ jQuery('.sm').fadeIn();
 
                                                                         <!-- /.col-lg-6 (nested) -->
                                     <div class="col-lg-6">
-                                    <div class="form-group">
-                                            <label>Brands#:</label>
-                                            <select class="form-control" name="brand_id"  <? if($action=='view')  { ?>disabled <?php } ?> required>
-                                                <?php echo GetCombo("Brands","brands","id","name","","id","$brand_id") ?>
-                                               </select>
-                                            </div>
+                                    
                                             
                                              
                                             <div class="form-group">
-                                            <label>Category#:</label>
-                                            <select required class="form-control" name="category"  <? if($action=='view')  { ?>disabled <?php } ?>>
+                                            <label>Wine Category#:</label>
+                                            <select required class="form-control" name="category" required>
                                             <?php echo GetCombo("Category","variants_type","id","name","","id","$category") ?>
                                             </select>
                                                
                                             </div>
-											
+											<div class="form-group">
+                                            <label>Wine Brands#:</label>
+                                            <select class="form-control" name="brand_id" required>
+                                                <?php echo GetCombo("Brands","brands","id","name","","id","$brand_id") ?>
+                                               </select>
+                                            </div>
 											 <div class="form-group">
-                                            <label>Variants#:</label>
-                                            <select required class="form-control" name="variants"  <? if($action=='view')  { ?>disabled <?php } ?>>
+                                            <label>Variant Name#:</label>
+                                            <select required class="form-control" name="variants"  required>
                                             <?php echo GetCombo("Variants","variants","id","name","","id","$variants") ?>
                                             </select>
                                                
@@ -244,7 +244,7 @@ jQuery('.sm').fadeIn();
 											
 											 <div class="form-group">
                                             <label>Volume Size#:</label>
-                                            <select required class="form-control" name="vol_id"  <? if($action=='view')  { ?>disabled <?php } ?>>
+                                            <select required class="form-control" name="vol_id" required>
 											<?php echo GetCombo("Volumes","volume","id","name","","id","$vol_id") ?>
                                             </select>
                                                

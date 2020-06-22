@@ -98,39 +98,40 @@ if(isset($_POST['forgot']))
 
 
 
-//Add Load
-if(isset($_POST['load']))
+//Stock Request
+if(isset($_POST['stockrequest']))
 {
-	$customername=mysqli_real_escape_string($con,htmlspecialchars(trim($_POST['customername'])));
-	$orderno=mysqli_real_escape_string(htmlspecialchars(trim($_POST['orderno'])));
-	$veichle=mysqli_real_escape_string(htmlspecialchars(trim($_POST['veichle'])));
-	$building=mysqli_real_escape_string(htmlspecialchars(trim($_POST['building'])));
-	$eml=mysqli_real_escape_string(htmlspecialchars(trim($_POST['eml'])));
-	$login=mysqli_num_rows(mysqli_query("select * from `loads` where `order_no`='$orderno'"));
+	$winename=mysqli_real_escape_string($con,htmlspecialchars(trim($_POST['winename'])));
+	$quantity=mysqli_real_escape_string($con,htmlspecialchars(trim($_POST['quantity'])));
+	$store_id=mysqli_real_escape_string($con,htmlspecialchars(trim($_POST['store_id'])));
+	$user_id=mysqli_real_escape_string($con,htmlspecialchars(trim($_POST['user_id'])));
+	$date=date("y-m-d");
+	
+	$login=mysqli_num_rows(mysqli_query($con,"select * from `stock_request` WHERE `date`='$date' AND `item_id`='$winename' AND `store_id`='$store_id' AND `store_user_id`='$user_id'"));
 	if($login!=0)
 	{
-		echo json_encode(array("value1" => "<div class='red'>Order Number Already Exist</div>","value2" => "E"));
+		echo json_encode(array("value1" => "<div class='red'>Stock Request Already Exist</div>","value2" => "E"));
 	}
 	else
 	{
-		$uid=GetName(users,id,email,$eml);
-		$date=date("y-m-d");
-		$q=mysqli_query("insert into `loads` (`arrival_date`,`customer_id`,`order_no`,`user_id`,`vech_no`,`building`) values ('$date','$customername','$orderno','$uid','$veichle','$building')");
+		 
+		
+	$q=mysqli_query($con,"insert into `stock_request` (`date`,`item_id`,`qty`,`store_id`,`store_user_id`) values ('$date','$winename','$quantity','$store_id','$user_id')");
 		 
 		if($q)
 		{
 			/*echo "<div class='green'>Bundle Added successfully !</div>";*/
-			$lastid = mysqli_insert_id();
-			echo json_encode(array("value1" => "<div class='green'>Load Added successfully !</div>","value2" => "$lastid","value3" => "S"));
+			$lastid = mysqli_insert_id($con);
+			echo json_encode(array("value1" => "<div class='green'>Stock Request successfully Placed!</div>","value2" => "$lastid","value3" => "S"));
 		}
 		else
 		{
 			/*echo "<div class='red'>Bundle Not Added !</div>";*/
-			echo json_encode(array("value1" => "<div class='red'>Load Not Added !</div>","value2" => "F"));
+			echo json_encode(array("value1" => "<div class='red'>Stock Request Not Placed!!</div>","value2" => "F"));
 		}
 	}
 
-	echo mysqli_error();
+	echo mysqli_error($con);
 }
 //Add Warrant
 if(isset($_POST['warrant']))

@@ -15,6 +15,7 @@ foreach($_GET as $var=>$valu)
 $$var = addslashes($valu);
 }
 }
+$curdate=date("y-m-d");
 
 if($action=='comp')
 
@@ -107,7 +108,7 @@ if($action=='wname')
 //select query to get the values
 {
 
-echo GetCombo("Item Name","variants","id","name","","name","id");
+echo GetCombo("Item Name","items","id","item_name","","item_name","id");
 }
 
 if($act=='wr')
@@ -150,305 +151,53 @@ $row1 = mysql_fetch_assoc($result);
 echo $sum = $row1['value_sum'];
 } 
 
-if($act=='loaddata')
-
-
-{
-echo "<script>
-		$(document).ready(function($) {
-			$('.menu').find('h3').click(function(){
-	
-				//Expand or collapse this panel
-				$(this).next().slideToggle('fast');
-	
-				//Hide the other panels
-				$('.content').not($(this).next()).slideUp('fast');
-	
-			});
-		});
-	</script>";
-$sqlload="SELECT * FROM loads";
-$seload=mysql_query($sqlload);
-$totrows=mysql_affected_rows();
-?>
-  
-
  
-<?php
-$i=0;
-while($resultload=mysql_fetch_object($seload))
+
+if($action=='stockreqrep')
+
 {
+echo "<script>
+	$(document).ready(function($) {
+		$('.menu').find('h3').click(function(){
+
+			//Expand or collapse this panel
+			$(this).next().slideToggle('fast');
+
+			//Hide the other panels
+			$('.content').not($(this).next()).slideUp('fast');
+
+		});
+	});
+</script>";
+$sqlload="SELECT * FROM stock_request WHERE store_id='$storeid' AND accepted='N'";
+$seload=mysqli_query($con,$sqlload);
+$totrows=mysqli_affected_rows($con);
 ?>
-
-<div class="menu">
-<h3><? echo stripslashes($resultload->order_no); ?></h3>
-
-<div class="content">
-<h4>date</h4>
-<p><? echo stripslashes($resultload->arrival_date); ?></p>
-<h4>customer name</h4>
-<p><? echo GetName(users,compname,id,$resultload->customer_id) ?></p>
-<h4>Veichle Number</h4>
-<p><? echo stripslashes($resultload->vech_no); ?></p>
-<h4>Building</h4>
-<p><? echo GetName(building,name,id,$resultload->building) ?></p>
-</div>
-</div>
-<?php } ?>
-
+<table>
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Name</th>
+            <th>Qty</th>
+			<th>Approved</th>
+        </tr>
+    </thead>
+    <tbody>
+	<?php
  
-<?php }  
-
-if($act=='warrantdata')
-
-{
-echo "<script>
-		$(document).ready(function($) {
-			$('.menu').find('h3').click(function(){
-	
-				//Expand or collapse this panel
-				$(this).next().slideToggle('fast');
-	
-				//Hide the other panels
-				$('.content').not($(this).next()).slideUp('fast');
-	
-			});
-		});
-	</script>";
-$sqlload="SELECT * FROM warrants";
-$seload=mysql_query($sqlload);
-$totrows=mysql_affected_rows();
-?>
+while($resultload=mysqli_fetch_object($seload))
+ 
+{ ?>
+        <tr> 
+            <th><? echo stripslashes($resultload->date); ?></th>
+            <td><? echo GetName('items','item_name','id',$resultload->item_id); ?> </td>
+            <td><? echo stripslashes($resultload->qty); ?></td>
+			<td><? echo stripslashes($resultload->accepted); ?></td>
+        </tr>
+         <?php } ?>
+    </tbody>
+</table>
 
 
-<?php
-$i=0;
-while($resultload=mysql_fetch_object($seload))
-{
-?>
-<div class="menu"> 
-<h3><? echo stripslashes($resultload->warrant_no); ?></h3>
-<div class="content">
 
-<h4>date</h4>
-<p><? echo stripslashes($resultload->w_date); ?></p>
-<h4>customer name</h4>
-<p><? echo GetName(users,compname,id,$resultload->customer_id) ?></p>
-<h4>Order Number</h4>
-<p><? echo GetName(loads,order_no,id,$resultload->load_id) ?></p>
-<h4>Veichle No</h4>
-<p><? echo GetName(loads,vech_no,id,$resultload->load_id) ?></p>
-</div>
-</div>
-<?php } ?>
-
-
-<?php }
-if($act=='bundledata')
-
-{
-echo "<script>
-		$(document).ready(function($) {
-			$('.menu').find('h3').click(function(){
-	
-				//Expand or collapse this panel
-				$(this).next().slideToggle('fast');
-	
-				//Hide the other panels
-				$('.content').not($(this).next()).slideUp('fast');
-	
-			});
-		});
-	</script>";
-$sqlload="SELECT * FROM bundles";
-$seload=mysql_query($sqlload);
-$totrows=mysql_affected_rows();
-?>
-
-<?php
-$i=0;
-while($resultload=mysql_fetch_object($seload))
-{
-?>
-<div class="menu"> 
-<h3><? echo stripslashes($resultload->batch_id); ?></h3>
-<div class="content">
-<h4>date</h4>
-<p><? echo stripslashes($resultload->arrival_date); ?></p>
-<h4>Order Number</h4>
-<p><? echo GetName(loads,order_no,id,$resultload->load_id) ?></p>
-<h4>Veichle Number</h4>
-<p><? echo GetName(loads,vech_no,id,$resultload->load_id) ?></p>
-<h4>Warrant Number</h4>
-<p><? echo GetName(warrants,warrant_no,id,$resultload->warrant_id) ?></p>
-<h4>Brand</h4>
-<p><? echo GetName(brands,name,id,$resultload->brand) ?></p>
-<h4>Pieces</h4>
-<p><? echo stripslashes($resultload->pieces); ?></p>
-<h4>Weight</h4>
-<p><? echo stripslashes($resultload->list_w); ?></p>
-<h4>Location</h4>
-<p><? echo GetName(location,name,id,$resultload->location) ?></p>
-</div>
-</div>
-<?php } ?>
-
-
-<?php }
-
-if($act=='loadrep')
-
-{
-echo "<script>
-		$(document).ready(function($) {
-			$('.menu').find('h3').click(function(){
-	
-				//Expand or collapse this panel
-				$(this).next().slideToggle('fast');
-	
-				//Hide the other panels
-				$('.content').not($(this).next()).slideUp('fast');
-	
-			});
-		});
-	</script>";
-$sqlload="SELECT * FROM loads";
-$seload=mysql_query($sqlload);
-$totrows=mysql_affected_rows();
-?>
-
-<?php
-$i=0;
-while($resultload=mysql_fetch_object($seload))
-{
-?>
-<div class="menu"> 
-<h3><? echo stripslashes($resultload->order_no); ?></h3>
-<div class="content">
-
-<h4>Total Warrants</h4>
-<p><? echo GetTotal(warrants,load_id,$resultload->id); ?></p>
-<h4>Total Bundles</h4>
-<p><? echo GetTotal(bundles,load_id,$resultload->id); ?></p>
-<h4>Total Weight</h4>
-<p>
-<?php 
-$sql = mysql_query("SELECT SUM(list_w) as total FROM bundles where load_id='$resultload->id'");
-$row = mysql_fetch_array($sql);
-echo $sum = $row['total'];
-
-?>
-</p>
-<h4>Total Pieces</h4>
-<p>
-<?php 
-$sql = mysql_query("SELECT SUM(pieces) as total FROM bundles where load_id='$resultload->id'");
-$row = mysql_fetch_array($sql);
-echo $sum = $row['total'];
-
-?>
-</p>
-<h4>Building</h4>
-<p> 
-<?php 
-$bid=GetName(loads,building,id,$resultload->id);
-echo GetName(building,name,id,$bid); 
-?>
-</p>
-<h4>Locations</h4>
-<p>
-<?php 
-$result= mysql_query("SELECT `location` FROM `bundles` WHERE `load_id`='$resultload->id' ");
-while($row = mysql_fetch_assoc($result)){
-$lid=$row["location"];
-echo GetName(location,name,id,$lid);
-echo ' ';
-}
-
-?>
-</p>
-</div>
-</div>
-<?php } ?>
-
-
-<?php }
-
-if($act=='warrep')
-
-{
-echo "<script>
-		$(document).ready(function($) {
-			$('.menu').find('h3').click(function(){
-	
-				//Expand or collapse this panel
-				$(this).next().slideToggle('fast');
-	
-				//Hide the other panels
-				$('.content').not($(this).next()).slideUp('fast');
-	
-			});
-		});
-	</script>";
-$sqlload="SELECT * FROM warrants";
-$seload=mysql_query($sqlload);
-$totrows=mysql_affected_rows();
-?>
-
-<?php
-$i=0;
-while($resultload=mysql_fetch_object($seload))
-{
-?>
-<div class="menu"> 
-<h3><? echo stripslashes($resultload->warrant_no); ?></h3>
-<div class="content">
-
-<h4>Company Name</h4>
-<p><? echo GetName(users,compname,id,$resultload->customer_id) ?></p>
-<h4>Total Bundles</h4>
-<p><? echo GetTotal(bundles,warrant_id,$resultload->id); ?></p>
-<h4>Total Weight</h4>
-<p>
-<?php 
-$sql = mysql_query("SELECT SUM(list_w) as total FROM bundles where warrant_id='$resultload->id'");
-$row = mysql_fetch_array($sql);
-echo $sum = $row['total'];
-
-?>
-</p>
-<h4>Total Pieces</h4>
-<p>
-<?php 
-$sql = mysql_query("SELECT SUM(pieces) as total FROM bundles where warrant_id='$resultload->id'");
-$row = mysql_fetch_array($sql);
-echo $sum = $row['total'];
-
-?>
-</p>
-<h4>Building</h4>
-<p> 
-<?php 
-$bid=GetName(loads,building,id,$resultload->id);
-echo GetName(building,name,id,$bid); 
-?>
-</p>
-<h4>Locations</h4>
-<p>
-<?php 
-$result= mysql_query("SELECT `location` FROM `bundles` WHERE `warrant_id`='$resultload->id' ");
-while($row = mysql_fetch_assoc($result)){
-$lid=$row["location"];
-echo GetName(location,name,id,$lid);
-echo ' ';
-}
-
-?>
-</p>
-</div>
-</div>
-<?php } ?>
-
-
-<?php }
-?>
+<?php  } ?>

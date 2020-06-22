@@ -19,11 +19,11 @@ if ($con->connect_error) {
 } 
  
 $addres='http://'.$_SERVER['SERVER_NAME'].'/';
-$imagepath='http://'.$_SERVER['SERVER_NAME'].'/wineshop/images/';
+$imagepath='http://'.$_SERVER['SERVER_NAME'].'/images/';
 
-$stylepath='http://'.$_SERVER['SERVER_NAME'].'/wineshop/css/';
+$stylepath='http://'.$_SERVER['SERVER_NAME'].'/css/';
 
-$jspath='http://'.$_SERVER['SERVER_NAME'].'/wineshop/js/';
+$jspath='http://'.$_SERVER['SERVER_NAME'].'/js/';
 
 $ADMIN_SITE_TITLE='Liquor Shop Inventory';
 $ADMIN_MAIL='rkp@webzin.in';
