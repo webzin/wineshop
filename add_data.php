@@ -5,23 +5,30 @@ include ("connect.php");
 	 
 
 if (isset($_POST['stockin'])) {
-	 $store_id = mysqli_real_escape_string($con, $_POST['store_id']);
-	 $store_mgr = mysqli_real_escape_string($con, $_POST['store_mgr']);
-	 $depo_id = mysqli_real_escape_string($con, $_POST['depo_id']);
+	 
+	$store_id = mysqli_real_escape_string($con, $_POST['store_id']);
+	$depo_id = mysqli_real_escape_string($con, $_POST['depo_id']);
+	$chalan = mysqli_real_escape_string($con, $_POST['chalan']);
+	
+	$chalan_file = $_FILES['chalanfile']['name'];
+	//echo $location = "chalan_files/";
+	//copy($_FILES['chalanfile']['tmp_name'],$location);
+	move_uploaded_file($_FILES['chalanfile']['tmp_name'], 'chalan_files/'.$chalan_file);
+
+	
+	 
 for($i = 0; $i < count($_POST['item_id']); $i++)
 {	
- 
     $item_id = mysqli_real_escape_string($con, $_POST['item_id'][$i]);
-    $qty = mysqli_real_escape_string($con, $_POST['qty'][$i]);
-	$chalan = mysqli_real_escape_string($con, $_POST['chalan'][$i]);
- 	echo $stockbal = StoreStockBal('stock_inventory','in_qty','out_qty',"store_id=$store_id AND item_id=$item_id" ); 
-	echo $balstock = $stockbal + $qty;
+    $qty = mysqli_real_escape_string($con, $_POST['total'][$i]);
 	
-    echo $sql = "INSERT INTO stock_inventory SET store_id='$store_id', `date`='$curdate', item_id='$item_id', in_qty='$qty', chalan_no='$chalan', depo_user_id='$depo_id', store_user_id='$store_mgr', store_accepted='YES', stock_bal='$balstock'";
+ 	// $stockbal = StoreStockBal('stock_inventory','in_qty','out_qty',"store_id=$store_id AND item_id=$item_id" ); 
+	// $balstock = $stockbal + $qty;
+    $sql = "INSERT INTO `stock_in` SET store_id='$store_id', `date`='$curdate', item_id='$item_id', in_qty='$qty', chalan_no='$chalan', chalan_file='$chalan_file', depo_user_id='$depo_id'";
     mysqli_query($con, $sql);
-	$upq = "UPDATE `items`, `stores` SET items.current_stock = items.current_stock + $qty, stores.total_stock = stores.total_stock + $qty
+	/*$upq = "UPDATE `items`, `stores` SET items.current_stock = items.current_stock + $qty, stores.total_stock = stores.total_stock + $qty
 WHERE items.id = $item_id AND stores.id = $store_id";
-	mysqli_query($con, $upq);
+	mysqli_query($con, $upq);*/
 }
 	
 if(mysqli_error($con))
@@ -30,7 +37,7 @@ if(mysqli_error($con))
 }
 else
 {
-    echo $i . " rows added";
+    echo $i . "rows Stock Uploaded";
 }
 }
 if (isset($_POST['stockout'])) {

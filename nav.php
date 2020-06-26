@@ -73,7 +73,7 @@
                                 <!-- /.nav-second-level -->
                             </li>
 							<li>
-                                <a href="manage_variants.php"><i class="fa fa-thermometer-full fa-fw"></i>Manage Volumes<span class="fa arrow"></span></a>
+                                <a href="manage_volume.php"><i class="fa fa-flask fa-fw"></i>Manage Volumes<span class="fa arrow"></span></a>
                                   
                                 <!-- /.nav-second-level -->
                             </li>
