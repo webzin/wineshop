@@ -72,3 +72,19 @@ else
 }
 	
 ?>
+
+
+<div id='row"+i+"' class='row'>
+<div class='col-lg-3'>
+<div class='form-group'>
+<select class='form-control' name='item_id[]' id='item_id' required><?php echo $brandsel; ?></select>
+</div>
+</div>
+<div class='col-lg-2'>
+<div class='form-group'>
+<select class='form-control' name='pkt[]' id='pkt' required></select>
+</div>
+</div>
+<div class='col-lg-2'><div class='form-group'><input required type='number' class='form-control' placeholder='Quantity' name='qty[]' id='qty"+i+"' value='<?php echo $qty; ?>'></div></div>
+<div class='col-lg-2'><div class='form-group'><input readonly required type='number' class='form-control' placeholder='Total' name='total[]' id='total' value='<?php echo $qty; ?>'</div></div>
+<div class='input-group-btn'><button id='"+i+"' class='btn btn-danger btn_remove' type='button' name='remove' > <span class='glyphicon glyphicon-minus' aria-hidden='true'></span> </button></div></div>
