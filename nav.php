@@ -44,36 +44,46 @@
                         <ul class="nav" id="side-menu">
                             
                             <li>
-                                <a href="dashboard.php" class="active"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                                <a href="dashboard.php" class="active"><i class="fa fa-dashboard fa-fw"></i>Dashboard</a>
                             </li>
                             
                             <li>
-                                <a href="manage_customer.php"><i class="fa fa-building fa-fw"></i> Stores<span class="fa arrow"></span></a>
+                                <a href="manage_customer.php"><i class="fa fa-building fa-fw"></i>Stores<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
-                                    <li> <a href="add_stores.php"><i class="fa fa-plus-square fa-fw"></i> Add Stores</a> </li>
+                                    <li> <a href="add_stores.php"><i class="fa fa-plus-square fa-fw"></i>Add Stores</a> </li>
 									
-                                    <li> <a href="manage_stores.php"><i class="fa fa-tasks fa-fw"></i> Manage Stores</a></li>
+                                    <li> <a href="manage_stores.php"><i class="fa fa-tasks fa-fw"></i>Manage Stores</a></li>
+									
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+							  <li>
+                                <a href="manage_bepari.php"><i class="fa fa-user fa-fw"></i>Beparis<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li> <a href="add_bepari.php"><i class="fa fa-plus-square fa-fw"></i>Add Beparis</a> </li>
+									
+                                    <li> <a href="manage_bepari.php"><i class="fa fa-tasks fa-fw"></i>Manage Beparis</a></li>
 									
                                 </ul>
                                 <!-- /.nav-second-level -->
                             </li>
 							<li>
-                                <a href="manage_types.php"><i class="fa fa-file-text fa-fw"></i>Manage Wine Types<span class="fa arrow"></span></a>
+                                <a href="manage_types.php"><i class="fa fa-file-text fa-fw"></i>Wine Types<span class="fa arrow"></span></a>
                                  
                                 <!-- /.nav-second-level -->
                             </li>
                             <li>
-                                <a href="manage_brands.php"><i class="fa fa-tasks fa-fw"></i> Manage Wine Brands<span class="fa arrow"></span></a>
+                                <a href="manage_brands.php"><i class="fa fa-tasks fa-fw"></i>Wine Brands<span class="fa arrow"></span></a>
                                   
                                 <!-- /.nav-second-level -->
                             </li>
 							<li>
-                                <a href="manage_variants.php"><i class="fa fa-glass fa-fw"></i>Manage Variant Names<span class="fa arrow"></span></a>
+                                <a href="manage_variants.php"><i class="fa fa-glass fa-fw"></i>Variant Names<span class="fa arrow"></span></a>
                                   
                                 <!-- /.nav-second-level -->
                             </li>
 							<li>
-                                <a href="manage_volume.php"><i class="fa fa-flask fa-fw"></i>Manage Volumes<span class="fa arrow"></span></a>
+                                <a href="manage_volume.php"><i class="fa fa-flask fa-fw"></i>Volumes<span class="fa arrow"></span></a>
                                   
                                 <!-- /.nav-second-level -->
                             </li>
@@ -93,7 +103,7 @@
                             
                            
                             <li>
-                                <a href="#"><i class="fa fa-map fa-fw"></i> Stock Report<span class="fa arrow"></span></a>
+                                <a href="#"><i class="fa fa-bar-chart fa-fw"></i>Stock Report<span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level">
 							  <li>
                                         <a href="stock_report.php"><i class="fa fa-bar-chart fa-fw"></i>Stock Report</a>

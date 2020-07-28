@@ -17,21 +17,22 @@ $brandsel=GetCombo("An Item","items","id","item_name","","id","$item_id");
 
 <script>     
 jQuery(document).ready(function(){
- 
+  var i = 1;
+            $('#add').click(function(){
+                i++;
+                $('#dynamic_field').append("<div id='row"+i+"' class='row'><div class='col-lg-3'><div class='form-group'><select class='form-control' name='item_id[]' required><?php echo $brandsel; ?></select></div></div><div class='col-lg-3'><div class='form-group'><input required type='number' class='form-control' placeholder='Quantity' name='qty[]' id='qty' value='<?php echo $qty; ?>'></div></div><div class='col-lg-3'><div class='form-group'> <select class='form-control' name='sale_type[]' id='sale_type' required><option value=''>Select Sale Type</option><option value='W'>Wholesale</option><option value='R'>Retail</option></select></div></div><div class='input-group-btn'><button id='"+i+"' class='btn btn-danger btn_remove' type='button' name='remove' > <span class='glyphicon glyphicon-minus' aria-hidden='true'></span> </button></div></div>");
+            });
+
+            $(document).on('click','.btn_remove', function(){
+                var button_id = $(this).attr("id");
+                $("#row"+button_id+"").remove();
+            });
 $("select#store_id").change(function() {
-	// myHandler($(this).val());
+   // myHandler($(this).val());
 	$('#store_mgr').load('data.php?act=store_mgr&store_id='+this.value, '', function(response, status, xhr) { });
-	$('#bepari_id').load('data.php?act=bepari_id&store_id='+this.value, '', function(response, status, xhr) { });
-	
 });
-$('#bepari_id').hide(); 
- $('#sale_type').change(function(){
-        if($('#sale_type').val() == 'W') {
-            $('#bepari_id').show(); 
-        } else {
-            $('#bepari_id').hide(); 
-        } 
-    });
+
+
 
 $('#additem').validate({
 
@@ -129,7 +130,15 @@ $('#additem').validate({
                                             </div>
                                      
                                     </div>
-									 
+									<div class="col-lg-3">
+                                    <div class="form-group">
+                                            <label>Sale Type#:</label>
+                                            <select class="form-control" name="store_mgr" id="store_mgr"  required>
+                                                
+                                               </select>
+                                            </div>
+                                     
+                                    </div>
 									
 								 
                                     </div>
@@ -163,16 +172,9 @@ $('#additem').validate({
                                         
                                         </div>
                                         </div>
-										<div class="col-lg-3">      
-                                        <div class="form-group">
-                                        
-                                       
-                                            <select class="form-control" name="bepari_id" id="bepari_id"  required>
-                                                 
-                                               </select>
-                                        </div>
-                                        </div>
-                                        
+                                        <div class="input-group-btn">
+        <button class="btn btn-success" type="button"  name="add" id="add"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> </button>
+      </div>
                                     </div>
                                     </div>
                                     <div class="row">       

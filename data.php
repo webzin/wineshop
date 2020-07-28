@@ -23,6 +23,12 @@ if($act=='store_mgr')
 
 echo GetCombo("Manager","users","id","name","type='STORE' AND store_id='$store_id'","id","$store_id");
 }
+if($act=='bepari_id')
+//select query to get the values
+{
+
+echo GetCombo("Bepari","bepari","id","name","sid='$store_id'","id","$sid");
+}
 
 
 if($act=='boxsize')
